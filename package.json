@@ -1,0 +1,88 @@
+{
+  "name": "datawhiz",
+  "version": "1.0.0",
+  "description": "Professional Data Analytics Platform",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "dev": "electron . --dev",
+    "build": "electron-builder",
+    "dist": "electron-builder --publish=never",
+    "build:installer": "powershell -ExecutionPolicy Bypass -File ./build-installer-final.ps1",
+    "build:unpacked": "electron-builder --dir --win --x64",
+    "build:inno": "powershell -ExecutionPolicy Bypass -File ./build-inno-installer.ps1"
+  },
+  "keywords": [
+    "data",
+    "analytics",
+    "visualization",
+    "machine-learning"
+  ],
+  "author": "DataWhiz Team",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^28.0.0",
+    "electron-builder": "^24.6.4",
+    "electron-packager": "^17.1.2",
+    "png2icons": "^2.0.1"
+  },
+  "dependencies": {
+    "axios": "^1.6.0"
+  },
+  "build": {
+    "appId": "com.datawhiz.app",
+    "productName": "DataWhiz",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "**/*",
+      "!node_modules/**/*",
+      "!backend/**/__pycache__/**/*",
+      "!backend/**/*.pyc",
+      "!backend/uploads/**/*",
+      "!.git/**/*",
+      "!.vscode/**/*",
+      "!dist/**/*",
+      "!*.log"
+    ],
+    "asarUnpack": [
+      "backend/**/*",
+      "requirements.txt"
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "assets/icon.ico",
+      "sign": false,
+      "signingHashAlgorithms": [],
+      "verifyUpdateCodeSignature": false,
+      "publisherName": null
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "DataWhiz",
+      "installerIcon": "assets/icon.ico",
+      "uninstallerIcon": "assets/icon.ico",
+      "installerHeaderIcon": "assets/icon.ico",
+      "deleteAppDataOnUninstall": false
+    },
+    "mac": {
+      "target": "dmg",
+      "icon": "assets/icon.icns"
+    },
+    "linux": {
+      "target": "AppImage",
+      "icon": "assets/icon.png"
+    }
+  }
+}

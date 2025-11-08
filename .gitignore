@@ -1,0 +1,22 @@
+node_modules/
+dist/
+win-unpacked/
+*.asar
+*.exe
+*.dll
+*.pak
+*.bin
+
+# Logs and temp files
+*.log
+*.tmp
+*.temp
+
+# Python cache
+__pycache__/
+*.pyc
+
+# IDE settings
+.vscode/
+.idea/
+

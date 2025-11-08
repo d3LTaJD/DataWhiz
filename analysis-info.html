@@ -1,0 +1,372 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>DataWhiz Analysis - Detailed Information</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles/theme.css">
+  <style>
+    .info-section {
+      margin-bottom: 48px;
+      padding: 32px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
+      border-radius: 16px;
+      border: 1px solid var(--divider);
+    }
+    .info-section h2 {
+      color: var(--primary);
+      margin-bottom: 16px;
+      font-size: 24px;
+    }
+    .info-section h3 {
+      color: var(--muted);
+      margin-top: 24px;
+      margin-bottom: 12px;
+      font-size: 18px;
+    }
+    .info-section p {
+      color: var(--muted-2);
+      line-height: 1.8;
+      margin-bottom: 16px;
+    }
+    .info-section ul {
+      color: var(--muted-2);
+      line-height: 1.8;
+      margin: 16px 0;
+      padding-left: 24px;
+    }
+    .info-section li {
+      margin-bottom: 8px;
+    }
+    .feature-card {
+      background: rgba(108,99,255,0.05);
+      border-left: 3px solid var(--primary);
+      padding: 24px;
+      margin: 20px 0;
+      border-radius: 8px;
+    }
+    .feature-card h4 {
+      color: var(--primary);
+      margin: 0 0 12px 0;
+      font-size: 20px;
+    }
+    .stat-card {
+      display: inline-block;
+      background: rgba(108,99,255,0.1);
+      border: 1px solid rgba(108,99,255,0.2);
+      padding: 16px 24px;
+      border-radius: 12px;
+      margin: 8px;
+    }
+    .stat-card strong {
+      display: block;
+      font-size: 28px;
+      color: var(--primary);
+      margin-bottom: 4px;
+    }
+    .stat-card span {
+      font-size: 14px;
+      color: var(--muted-2);
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="logo">
+          <img src="mind-map.png" alt="DataWhiz Logo" style="width: 100%; height: 100%; object-fit: contain;" />
+        </div>
+        <div class="title">DataWhiz</div>
+      </div>
+      <nav class="nav">
+        <div class="item" onclick="window.location.href='index.html'">🏠 Dashboard</div>
+        <div class="item" onclick="uploadData()">⬆️ Upload Data</div>
+        <div class="item active">📊 Analysis</div>
+        <div class="item" onclick="openMLPage()">🤖 Machine Learning</div>
+        <div class="item" onclick="window.location.href='settings.html'">⚙️ Settings</div>
+      </nav>
+      <div style="flex:1;"></div>
+      <div class="footer">v1.0 • © DataWhiz</div>
+    </aside>
+
+    <main style="flex:1; display:flex; flex-direction:column;">
+      <header class="header">
+        <div style="width:20px;"></div>
+        <div class="search" style="max-width: none; margin: 0;">
+          <h1 style="margin: 0; color: var(--muted); font-size: 28px; font-weight: 700;">📊 Data Analysis</h1>
+        </div>
+        <button id="themeToggle" class="btn ghost">🌙 Toggle Theme</button>
+      </header>
+
+      <section class="content">
+        <div class="container">
+          <div style="text-align: center; margin-bottom: 48px;">
+            <h2 style="color: var(--primary); font-size: 32px; margin-bottom: 12px;">Comprehensive Data Analysis</h2>
+            <p style="color: var(--muted-2); font-size: 18px;">Transform your raw data into actionable insights with powerful analytical tools</p>
+            <div style="margin-top: 32px;">
+              <div class="stat-card">
+                <strong>25+</strong>
+                <span>Analytics Tools</span>
+              </div>
+              <div class="stat-card">
+                <strong>8+</strong>
+                <span>Chart Types</span>
+              </div>
+              <div class="stat-card">
+                <strong>3</strong>
+                <span>Analysis Domains</span>
+              </div>
+              <div class="stat-card">
+                <strong>100%</strong>
+                <span>Real Data</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Overview -->
+          <div class="info-section">
+            <h2>🔍 Overview</h2>
+            <p>
+              DataWhiz Analysis provides comprehensive tools to explore, understand, and gain insights from your data. 
+              Our platform supports multiple analysis domains including Healthcare, Business, and Finance, each with 
+              specialized tools and metrics tailored to your industry needs.
+            </p>
+            <p>
+              Whether you're analyzing patient outcomes, business revenue, or financial trends, DataWhiz delivers 
+              powerful statistical analysis combined with intuitive visualizations to help you make data-driven decisions.
+            </p>
+          </div>
+
+          <!-- Statistical Analysis -->
+          <div class="info-section">
+            <h2>📈 Statistical Analysis Features</h2>
+            
+            <div class="feature-card">
+              <h4>Descriptive Statistics</h4>
+              <p>Get instant insights with comprehensive descriptive statistics:</p>
+              <ul>
+                <li><strong>Central Tendency:</strong> Mean, median, mode calculations</li>
+                <li><strong>Dispersion Measures:</strong> Variance, standard deviation, range</li>
+                <li><strong>Percentiles:</strong> Quartiles, deciles, and custom percentiles</li>
+                <li><strong>Distribution Summary:</strong> Skewness and kurtosis analysis</li>
+              </ul>
+            </div>
+
+            <div class="feature-card">
+              <h4>Distribution Analysis</h4>
+              <p>Understand your data distribution patterns:</p>
+              <ul>
+                <li><strong>Normality Tests:</strong> Shapiro-Wilk, Kolmogorov-Smirnov tests</li>
+                <li><strong>Distribution Identification:</strong> Identify Gaussian, exponential, log-normal patterns</li>
+                <li><strong>Outlier Detection:</strong> IQR method, Z-score analysis</li>
+                <li><strong>Histogram Analysis:</strong> Visual distribution analysis</li>
+              </ul>
+            </div>
+
+            <div class="feature-card">
+              <h4>Correlation Analysis</h4>
+              <p>Discover relationships between variables:</p>
+              <ul>
+                <li><strong>Pearson Correlation:</strong> Linear relationships for continuous data</li>
+                <li><strong>Spearman Correlation:</strong> Rank-based relationships for ordinal data</li>
+                <li><strong>Correlation Matrix:</strong> Visualize all variable relationships</li>
+                <li><strong>Significance Testing:</strong> P-values and confidence intervals</li>
+              </ul>
+            </div>
+
+            <div class="feature-card">
+              <h4>Regression Analysis</h4>
+              <p>Model and predict relationships:</p>
+              <ul>
+                <li><strong>Linear Regression:</strong> Simple and multiple linear models</li>
+                <li><strong>Logistic Regression:</strong> Binary outcome predictions</li>
+                <li><strong>Model Evaluation:</strong> R², adjusted R², RMSE metrics</li>
+                <li><strong>Residual Analysis:</strong> Diagnostic plots and validation</li>
+              </ul>
+            </div>
+
+            <div class="feature-card">
+              <h4>Time Series Analysis</h4>
+              <p>Analyze temporal patterns and trends:</p>
+              <ul>
+                <li><strong>Trend Analysis:</strong> Identify upward, downward, or stationary trends</li>
+                <li><strong>Seasonality Detection:</strong> Seasonal patterns and cycles</li>
+                <li><strong>Forecasting:</strong> Future value predictions</li>
+                <li><strong>Volatility Analysis:</strong> Variance and risk assessment</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Domain-Specific Analysis -->
+          <div class="info-section">
+            <h2>🎯 Domain-Specific Analysis</h2>
+            
+            <div class="feature-card">
+              <h4>🏥 Healthcare Analysis</h4>
+              <p>Comprehensive healthcare data analysis tools:</p>
+              <ul>
+                <li><strong>Patient Demographics:</strong> Age, gender, geographic distribution</li>
+                <li><strong>Medical Condition Analysis:</strong> Disease prevalence and patterns</li>
+                <li><strong>Treatment Outcomes:</strong> Success rates and effectiveness metrics</li>
+                <li><strong>Risk Assessment:</strong> Patient risk stratification</li>
+                <li><strong>Vital Signs Analysis:</strong> Blood pressure, heart rate, BMI trends</li>
+                <li><strong>Diagnosis Patterns:</strong> ICD code analysis and categorization</li>
+                <li><strong>Treatment Effectiveness:</strong> Medication and procedure success rates</li>
+                <li><strong>Cost Analysis:</strong> Billing amounts and cost-effectiveness</li>
+                <li><strong>Insurance Analysis:</strong> Coverage and claim patterns</li>
+                <li><strong>Lab Results:</strong> Test value analysis and interpretations</li>
+                <li><strong>Clinical Pathways:</strong> Treatment protocol analysis</li>
+              </ul>
+            </div>
+
+            <div class="feature-card">
+              <h4>💼 Business Analysis</h4>
+              <p>Complete business intelligence and analytics:</p>
+              <ul>
+                <li><strong>Revenue Analysis:</strong> Total revenue, average order value calculations</li>
+                <li><strong>Sales Trends:</strong> Daily, weekly, monthly patterns</li>
+                <li><strong>Product Performance:</strong> Top products and category analysis</li>
+                <li><strong>Customer Segmentation:</strong> RFM analysis and lifetime value</li>
+                <li><strong>Geographic Analysis:</strong> Revenue by country and region</li>
+                <li><strong>Demand Forecasting:</strong> Future sales predictions</li>
+                <li><strong>Churn Prediction:</strong> Customer retention analysis</li>
+                <li><strong>Customer Segmentation:</strong> Behavioral clustering</li>
+                <li><strong>Anomaly Detection:</strong> Unusual transaction identification</li>
+              </ul>
+            </div>
+
+            <div class="feature-card">
+              <h4>💰 Finance Analysis</h4>
+              <p>Advanced financial data analysis:</p>
+              <ul>
+                <li><strong>Budget Allocation:</strong> Expense categorization and planning</li>
+                <li><strong>Financial Metrics:</strong> ROI, profit margins, cash flow</li>
+                <li><strong>Cost Analysis:</strong> Variable vs fixed cost breakdown</li>
+                <li><strong>Trend Analysis:</strong> Financial performance over time</li>
+                <li><strong>Variance Analysis:</strong> Budget vs actual comparisons</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Visualization Tools -->
+          <div class="info-section">
+            <h2>📊 Visualization Capabilities</h2>
+            <p>Transform your analysis results into compelling visual stories:</p>
+            
+            <div class="feature-card">
+              <h4>Interactive Charts</h4>
+              <ul>
+                <li><strong>Line Charts:</strong> Time series and trend visualization</li>
+                <li><strong>Bar Charts:</strong> Categorical comparisons (horizontal and vertical)</li>
+                <li><strong>Scatter Plots:</strong> Relationship analysis between variables</li>
+                <li><strong>Pie Charts:</strong> Proportional distributions</li>
+                <li><strong>Doughnut Charts:</strong> Multi-level category visualization</li>
+                <li><strong>Bubble Charts:</strong> Three-dimensional data representation</li>
+                <li><strong>Geographic Maps:</strong> Location-based data visualization</li>
+                <li><strong>Heatmaps:</strong> Correlation and intensity visualization</li>
+              </ul>
+            </div>
+
+            <div class="feature-card">
+              <h4>Advanced Features</h4>
+              <ul>
+                <li>Zoom and pan capabilities for detailed exploration</li>
+                <li>Interactive tooltips with detailed data points</li>
+                <li>Dynamic filtering and drill-down options</li>
+                <li>Real-time data updates</li>
+                <li>Customizable color schemes and themes</li>
+                <li>Export options (PNG, PDF, SVG)</li>
+                <li>Embeddable charts for presentations</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Quality Checks -->
+          <div class="info-section">
+            <h2>✅ Data Quality Checks</h2>
+            <p>Ensure your data is reliable before analysis:</p>
+            
+            <div class="feature-card">
+              <h4>Automated Quality Assessment</h4>
+              <ul>
+                <li><strong>Completeness:</strong> Missing value detection and percentage</li>
+                <li><strong>Uniqueness:</strong> Duplicate record identification</li>
+                <li><strong>Consistency:</strong> Data type validation and format checks</li>
+                <li><strong>Accuracy:</strong> Range validation and outlier detection</li>
+                <li><strong>Validity:</strong> Business rule compliance checking</li>
+                <li><strong>Timeliness:</strong> Data freshness and currency metrics</li>
+              </ul>
+            </div>
+
+            <div class="feature-card">
+              <h4>Quality Reports</h4>
+              <ul>
+                <li>Comprehensive quality score calculation</li>
+                <li>Detailed quality dimension breakdown</li>
+                <li>Visual quality dashboard</li>
+                <li>Recommendations for data improvement</li>
+                <li>Historical quality trend tracking</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Export and Sharing -->
+          <div class="info-section">
+            <h2>📤 Export and Sharing</h2>
+            <p>Share your insights across your organization:</p>
+            
+            <ul>
+              <li><strong>Report Generation:</strong> Automated PDF and HTML reports</li>
+              <li><strong>Chart Export:</strong> High-quality PNG, PDF, SVG formats</li>
+              <li><strong>Data Export:</strong> CSV, Excel, JSON formats</li>
+              <li><strong>Dashboard Sharing:</strong> Secure link sharing</li>
+              <li><strong>API Access:</strong> Programmatic data retrieval</li>
+            </ul>
+          </div>
+
+          <!-- Getting Started -->
+          <div style="text-align: center; margin: 48px 0;">
+            <h2 style="color: var(--primary); font-size: 32px; margin-bottom: 24px;">Ready to Analyze Your Data?</h2>
+            <p style="color: var(--muted-2); font-size: 18px; margin-bottom: 32px;">Launch the analysis workspace and start exploring your data!</p>
+            <div style="display: flex; gap: 12px; justify-content: center;">
+              <button class="btn primary" onclick="launchAnalysis()">🚀 Launch Analysis</button>
+              <button class="btn ghost" onclick="uploadData()">⬆️ Upload Data</button>
+              <button class="btn ghost" onclick="window.location.href='index.html'">🏠 Back to Home</button>
+            </div>
+          </div>
+
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    function launchAnalysis() {
+      window.location.href = 'analysis.html';
+    }
+    
+    function uploadData() {
+      window.location.href = 'analysis.html';
+    }
+
+    function openMLPage() {
+      window.location.href = 'machine-learning-info.html';
+    }
+    
+    // theme toggle
+    const btn = document.getElementById('themeToggle');
+    btn.addEventListener('click', () => {
+      document.documentElement.classList.toggle('light');
+      localStorage.setItem('dw-theme', document.documentElement.classList.contains('light') ? 'light' : 'dark');
+    });
+    
+    // restore theme
+    (function(){
+      const t = localStorage.getItem('dw-theme');
+      if (t === 'light') document.documentElement.classList.add('light');
+    })();
+  </script>
+</body>
+</html>
+

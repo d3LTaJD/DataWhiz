@@ -1,0 +1,520 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>DataWhiz Tutorial - Getting Started Guide</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles/theme.css">
+  <style>
+    .tutorial-section {
+      margin-bottom: 48px;
+      padding: 32px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
+      border-radius: 16px;
+      border: 1px solid var(--divider);
+    }
+    .tutorial-section h2 {
+      color: var(--primary);
+      margin-bottom: 16px;
+      font-size: 24px;
+    }
+    .tutorial-section h3 {
+      color: var(--muted);
+      margin-top: 24px;
+      margin-bottom: 12px;
+      font-size: 18px;
+    }
+    .tutorial-section p {
+      color: var(--muted-2);
+      line-height: 1.8;
+      margin-bottom: 16px;
+    }
+    .tutorial-section ul {
+      color: var(--muted-2);
+      line-height: 1.8;
+      margin: 16px 0;
+      padding-left: 24px;
+    }
+    .tutorial-section li {
+      margin-bottom: 8px;
+    }
+    .step-card {
+      background: rgba(108,99,255,0.05);
+      border-left: 3px solid var(--primary);
+      padding: 20px;
+      margin: 16px 0;
+      border-radius: 8px;
+    }
+    .step-number {
+      display: inline-block;
+      width: 32px;
+      height: 32px;
+      background: var(--primary);
+      color: white;
+      border-radius: 50%;
+      text-align: center;
+      line-height: 32px;
+      font-weight: 700;
+      margin-right: 12px;
+    }
+    .code-block {
+      background: rgba(0,0,0,0.3);
+      border: 1px solid var(--divider);
+      border-radius: 8px;
+      padding: 16px;
+      margin: 16px 0;
+      font-family: 'Courier New', monospace;
+      color: var(--accent);
+      overflow-x: auto;
+    }
+    .tip-box {
+      background: rgba(0,201,167,0.1);
+      border-left: 3px solid var(--accent);
+      padding: 16px;
+      margin: 16px 0;
+      border-radius: 8px;
+    }
+    .tip-box strong {
+      color: var(--accent);
+    }
+    .back-btn {
+      position: fixed;
+      top: 80px;
+      left: 260px;
+      background: var(--surface-2);
+      border: 1px solid var(--divider);
+      padding: 10px 20px;
+      border-radius: 8px;
+      color: var(--muted);
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.2s;
+    }
+    .back-btn:hover {
+      background: rgba(108,99,255,0.1);
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="logo">
+          <img src="mind-map.png" alt="DataWhiz Logo" style="width: 100%; height: 100%; object-fit: contain;" />
+        </div>
+        <div class="title">DataWhiz</div>
+      </div>
+      <nav class="nav">
+        <div class="item" onclick="window.location.href='index.html'">🏠 Dashboard</div>
+        <div class="item" onclick="uploadData()">⬆️ Upload Data</div>
+        <div class="item" onclick="launchAnalysis()">📊 Analysis</div>
+        <div class="item">🤖 Machine Learning</div>
+        <div class="item" onclick="window.location.href='settings.html'">⚙️ Settings</div>
+      </nav>
+      <div style="flex:1;"></div>
+      <div class="footer">v1.0 • © DataWhiz</div>
+    </aside>
+
+    <main style="flex:1; display:flex; flex-direction:column;">
+      <header class="header">
+        <div style="width:20px;"></div>
+        <div class="search" style="max-width: none; margin: 0;">
+          <h1 style="margin: 0; color: var(--muted); font-size: 28px; font-weight: 700;">📖 DataWhiz Tutorial</h1>
+        </div>
+        <button id="themeToggle" class="btn ghost">🌙 Toggle Theme</button>
+      </header>
+
+      <section class="content">
+        <div class="container">
+          <div style="text-align: center; margin-bottom: 48px;">
+            <h2 style="color: var(--primary); font-size: 32px; margin-bottom: 12px;">Welcome to DataWhiz</h2>
+            <p style="color: var(--muted-2); font-size: 18px;">Learn how to transform your data into powerful insights with our comprehensive analytics platform</p>
+          </div>
+
+          <!-- Step 1: Getting Started -->
+          <div class="tutorial-section">
+            <h2>🚀 Step 1: Getting Started</h2>
+            <p>DataWhiz is a powerful data analytics platform designed to help you analyze, visualize, and gain insights from your data. This tutorial will guide you through the complete workflow.</p>
+            
+            <div class="step-card">
+              <div style="display: flex; align-items: center;">
+                <span class="step-number">1</span>
+                <h3 style="margin: 0;">Launch the Application</h3>
+              </div>
+              <p style="margin-top: 12px;">Start by opening DataWhiz from your desktop or web browser. The main dashboard will display your analytics workspace.</p>
+            </div>
+
+            <div class="step-card">
+              <div style="display: flex; align-items: center;">
+                <span class="step-number">2</span>
+                <h3 style="margin: 0;">Navigate the Interface</h3>
+              </div>
+              <p style="margin-top: 12px;">Familiarize yourself with the sidebar navigation:
+                <ul>
+                  <li><strong>Dashboard:</strong> Return to the main page</li>
+                  <li><strong>Upload Data:</strong> Import your datasets</li>
+                  <li><strong>Analysis:</strong> Perform data analysis</li>
+                  <li><strong>Machine Learning:</strong> Build predictive models</li>
+                  <li><strong>Settings:</strong> Configure your preferences</li>
+                </ul>
+              </p>
+            </div>
+          </div>
+
+          <!-- Step 2: Uploading Data -->
+          <div class="tutorial-section">
+            <h2>📁 Step 2: Uploading Your Data</h2>
+            <p>DataWhiz supports multiple file formats for easy data import. Here's how to get started:</p>
+
+            <div class="step-card">
+              <div style="display: flex; align-items: center;">
+                <span class="step-number">1</span>
+                <h3 style="margin: 0;">Prepare Your Data</h3>
+              </div>
+              <p style="margin-top: 12px;">Ensure your data files are in one of these formats:</p>
+              <ul>
+                <li><strong>CSV (.csv):</strong> Comma-separated values</li>
+                <li><strong>Excel (.xlsx):</strong> Microsoft Excel files</li>
+                <li><strong>JSON (.json):</strong> JavaScript Object Notation</li>
+              </ul>
+            </div>
+
+            <div class="step-card">
+              <div style="display: flex; align-items: center;">
+                <span class="step-number">2</span>
+                <h3 style="margin: 0;">Upload Your Files</h3>
+              </div>
+              <p style="margin-top: 12px;">Click on "Upload Data" in the sidebar or use the upload button on the dashboard. You can:</p>
+              <ul>
+                <li>Upload single or multiple files at once</li>
+                <li>Drag and drop files into the upload area</li>
+                <li>Select files from your computer</li>
+              </ul>
+              <div class="code-block">Maximum file size: 100MB per file</div>
+            </div>
+
+            <div class="step-card">
+              <div style="display: flex; align-items: center;">
+                <span class="step-number">3</span>
+                <h3 style="margin: 0;">Review Uploaded Data</h3>
+              </div>
+              <p style="margin-top: 12px;">After uploading, DataWhiz will automatically:</p>
+              <ul>
+                <li>Merge multiple files into a single dataset</li>
+                <li>Detect column types and data formats</li>
+                <li>Show you a preview of your data</li>
+                <li>Display basic statistics about your dataset</li>
+              </ul>
+            </div>
+
+            <div class="tip-box">
+              <strong>💡 Pro Tip:</strong> Make sure your data has proper headers in the first row for best results!
+            </div>
+          </div>
+
+          <!-- Step 3: Data Cleaning -->
+          <div class="tutorial-section">
+            <h2>🧹 Step 3: Data Cleaning & Quality Checks</h2>
+            <p>Clean, high-quality data is essential for accurate analysis. DataWhiz helps you prepare your data automatically.</p>
+
+            <div class="step-card">
+              <div style="display: flex; align-items: center;">
+                <span class="step-number">1</span>
+                <h3 style="margin: 0;">Automatic Quality Checks</h3>
+              </div>
+              <p style="margin-top: 12px;">DataWhiz automatically identifies:
+                <ul>
+                  <li>Missing values and empty cells</li>
+                  <li>Duplicate records</li>
+                  <li>Data type inconsistencies</li>
+                  <li>Outlier values</li>
+                </ul>
+              </p>
+            </div>
+
+            <div class="step-card">
+              <div style="display: flex; align-items: center;">
+                <span class="step-number">2</span>
+                <h3 style="margin: 0;">Data Cleaning Options</h3>
+              </div>
+              <p style="margin-top: 12px;">Use the cleaning tools to:
+                <ul>
+                  <li><strong>Remove Duplicates:</strong> Eliminate duplicate rows</li>
+                  <li><strong>Handle Missing Values:</strong> Fill or remove empty cells</li>
+                  <li><strong>Fix Data Types:</strong> Convert columns to correct formats</li>
+                  <li><strong>Remove Outliers:</strong> Clean extreme values</li>
+                </ul>
+              </p>
+            </div>
+
+            <div class="step-card">
+              <div style="display: flex; align-items: center;">
+                <span class="step-number">3</span>
+                <h3 style="margin: 0;">Transform Data</h3>
+              </div>
+              <p style="margin-top: 12px;">Prepare your data for analysis by:
+                <ul>
+                  <li>Creating new calculated columns</li>
+                  <li>Applying data transformations</li>
+                  <li>Standardizing formats</li>
+                  <li>Normalizing values</li>
+                </ul>
+              </p>
+            </div>
+          </div>
+
+          <!-- Step 4: Analysis -->
+          <div class="tutorial-section">
+            <h2>📊 Step 4: Running Analysis</h2>
+            <p>Once your data is cleaned, you can perform various types of analysis depending on your data domain.</p>
+
+            <div class="step-card">
+              <div style="display: flex; align-items: center;">
+                <span class="step-number">1</span>
+                <h3 style="margin: 0;">Select Analysis Type</h3>
+              </div>
+              <p style="margin-top: 12px;">Choose from domain-specific analysis:
+                <ul>
+                  <li><strong>Healthcare Analysis:</strong> Patient demographics, medical conditions, treatment outcomes</li>
+                  <li><strong>Business Analysis:</strong> Revenue, sales trends, customer behavior</li>
+                  <li><strong>Finance Analysis:</strong> Financial metrics, budget allocation, cost analysis</li>
+                </ul>
+              </p>
+            </div>
+
+            <div class="step-card">
+              <div style="display: flex; align-items: center;">
+                <span class="step-number">2</span>
+                <h3 style="margin: 0;">Run Statistical Analysis</h3>
+              </div>
+              <p style="margin-top: 12px;">DataWhiz performs:
+                <ul>
+                  <li><strong>Descriptive Statistics:</strong> Mean, median, mode, variance</li>
+                  <li><strong>Distribution Analysis:</strong> Skewness, kurtosis tests</li>
+                  <li><strong>Correlation Analysis:</strong> Find relationships between variables</li>
+                  <li><strong>Trend Analysis:</strong> Time series and forecasting</li>
+                </ul>
+              </p>
+            </div>
+
+            <div class="step-card">
+              <div style="display: flex; align-items: center;">
+                <span class="step-number">3</span>
+                <h3 style="margin: 0;">Review Results</h3>
+              </div>
+              <p style="margin-top: 12px;">After analysis, you'll see:
+                <ul>
+                  <li>Summary statistics and key metrics</li>
+                  <li>Interactive visualizations and charts</li>
+                  <li>Detailed reports and insights</li>
+                  <li>Exportable results</li>
+                </ul>
+              </p>
+            </div>
+          </div>
+
+          <!-- Step 5: Machine Learning -->
+          <div class="tutorial-section">
+            <h2>🤖 Step 5: Machine Learning Models</h2>
+            <p>Build predictive models to forecast trends, classify data, and identify patterns.</p>
+
+            <div class="step-card">
+              <div style="display: flex; align-items: center;">
+                <span class="step-number">1</span>
+                <h3 style="margin: 0;">Select ML Model</h3>
+              </div>
+              <p style="margin-top: 12px;">Choose from available models:
+                <ul>
+                  <li><strong>Random Forest:</strong> Classification and regression tasks</li>
+                  <li><strong>Gradient Boosting:</strong> High-accuracy predictions</li>
+                  <li><strong>K-Means Clustering:</strong> Customer and data segmentation</li>
+                  <li><strong>Regression Models:</strong> Trend analysis and forecasting</li>
+                  <li><strong>Churn Prediction:</strong> Identify at-risk customers</li>
+                  <li><strong>Anomaly Detection:</strong> Find unusual patterns</li>
+                </ul>
+              </p>
+            </div>
+
+            <div class="step-card">
+              <div style="display: flex; align-items: center;">
+                <span class="step-number">2</span>
+                <h3 style="margin: 0;">Train Your Model</h3>
+              </div>
+              <p style="margin-top: 12px;">The system will:
+                <ul>
+                  <li>Automatically split your data into training and testing sets</li>
+                  <li>Train the model using optimized parameters</li>
+                  <li>Validate performance with cross-validation</li>
+                  <li>Provide accuracy metrics and reports</li>
+                </ul>
+              </p>
+            </div>
+
+            <div class="step-card">
+              <div style="display: flex; align-items: center;">
+                <span class="step-number">3</span>
+                <h3 style="margin: 0;">Evaluate and Use</h3>
+              </div>
+              <p style="margin-top: 12px;">Review model performance:
+                <ul>
+                  <li>Accuracy, precision, and recall metrics</li>
+                  <li>Feature importance rankings</li>
+                  <li>Prediction visualizations</li>
+                  <li>Export predictions for further use</li>
+                </ul>
+              </p>
+            </div>
+
+            <div class="tip-box">
+              <strong>💡 Pro Tip:</strong> Ensure you have sufficient data (at least 20 rows) for meaningful model training!
+            </div>
+          </div>
+
+          <!-- Step 6: Visualizations -->
+          <div class="tutorial-section">
+            <h2>📈 Step 6: Creating Visualizations</h2>
+            <p>Transform your data into compelling visual stories with interactive charts and graphs.</p>
+
+            <div class="step-card">
+              <div style="display: flex; align-items: center;">
+                <span class="step-number">1</span>
+                <h3 style="margin: 0;">Chart Types Available</h3>
+              </div>
+              <p style="margin-top: 12px;">Choose from multiple visualization types:
+                <ul>
+                  <li><strong>Line Charts:</strong> Trends over time</li>
+                  <li><strong>Bar Charts:</strong> Comparing categories</li>
+                  <li><strong>Scatter Plots:</strong> Relationships between variables</li>
+                  <li><strong>Pie Charts:</strong> Proportional distributions</li>
+                  <li><strong>Geographic Maps:</strong> Location-based data</li>
+                </ul>
+              </p>
+            </div>
+
+            <div class="step-card">
+              <div style="display: flex; align-items: center;">
+                <span class="step-number">2</span>
+                <h3 style="margin: 0;">Interactive Features</h3>
+              </div>
+              <p style="margin-top: 12px;">All charts include:
+                <ul>
+                  <li>Zoom and pan capabilities</li>
+                  <li>Hover tooltips for data points</li>
+                  <li>Clickable legends and filters</li>
+                  <li>Real-time data updates</li>
+                </ul>
+              </p>
+            </div>
+
+            <div class="step-card">
+              <div style="display: flex; align-items: center;">
+                <span class="step-number">3</span>
+                <h3 style="margin: 0;">Export Options</h3>
+              </div>
+              <p style="margin-top: 12px;">Share your visualizations:
+                <ul>
+                  <li>Export as PNG images</li>
+                  <li>Save as PDF reports</li>
+                  <li>Download data as CSV</li>
+                  <li>Embed in presentations</li>
+                </ul>
+              </p>
+            </div>
+          </div>
+
+          <!-- Best Practices -->
+          <div class="tutorial-section">
+            <h2>✨ Best Practices</h2>
+            <p>Follow these tips to get the most out of DataWhiz:</p>
+            
+            <div style="margin-top: 24px;">
+              <h3>Data Preparation</h3>
+              <ul>
+                <li>Always clean your data before analysis</li>
+                <li>Check for missing values and duplicates</li>
+                <li>Ensure consistent data formats</li>
+                <li>Use descriptive column names</li>
+              </ul>
+            </div>
+
+            <div style="margin-top: 24px;">
+              <h3>Analysis Workflow</h3>
+              <ul>
+                <li>Start with descriptive statistics</li>
+                <li>Explore correlations between variables</li>
+                <li>Visualize key findings</li>
+                <li>Validate results with ML models</li>
+              </ul>
+            </div>
+
+            <div style="margin-top: 24px;">
+              <h3>Performance Tips</h3>
+              <ul>
+                <li>Use appropriate file sizes (under 100MB)</li>
+                <li>Close unused browser tabs for better performance</li>
+                <li>Enable GPU acceleration if available</li>
+                <li>Cache results for frequently used analyses</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Getting Help -->
+          <div class="tutorial-section">
+            <h2>🆘 Need Help?</h2>
+            <p>If you encounter any issues or have questions:</p>
+            <ul>
+              <li>Review the documentation and feature guides</li>
+              <li>Check the "Learn More" modals for each feature</li>
+              <li>Ensure your data format is supported</li>
+              <li>Verify your system meets minimum requirements</li>
+            </ul>
+
+            <div class="tip-box" style="margin-top: 24px;">
+              <strong>🎯 Quick Start:</strong> The fastest way to get started is to upload a CSV file and click "Launch Analysis"!
+            </div>
+          </div>
+
+          <!-- Next Steps -->
+          <div style="text-align: center; margin: 48px 0;">
+            <h2 style="color: var(--primary); font-size: 32px; margin-bottom: 24px;">Ready to Get Started?</h2>
+            <p style="color: var(--muted-2); font-size: 18px; margin-bottom: 32px;">Now that you understand the workflow, it's time to analyze your data!</p>
+            <div style="display: flex; gap: 12px; justify-content: center;">
+              <button class="btn primary" onclick="launchAnalysis()">🚀 Launch Dashboard</button>
+              <button class="btn ghost" onclick="uploadData()">⬆️ Upload Data</button>
+              <button class="btn ghost" onclick="window.location.href='index.html'">🏠 Back to Home</button>
+            </div>
+          </div>
+
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    // Navigation functions
+    function launchAnalysis() {
+      window.location.href = 'analysis.html';
+    }
+    
+    function uploadData() {
+      window.location.href = 'analysis.html';
+    }
+    
+    // theme toggle
+    const btn = document.getElementById('themeToggle');
+    btn.addEventListener('click', () => {
+      document.documentElement.classList.toggle('light');
+      localStorage.setItem('dw-theme', document.documentElement.classList.contains('light') ? 'light' : 'dark');
+    });
+    
+    // restore theme
+    (function(){
+      const t = localStorage.getItem('dw-theme');
+      if (t === 'light') document.documentElement.classList.add('light');
+    })();
+  </script>
+</body>
+</html>
+

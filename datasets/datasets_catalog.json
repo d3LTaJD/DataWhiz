@@ -1,0 +1,29 @@
+{
+  "datasets": [
+    {
+      "id": "healthcare_dataset",
+      "filename": "healthcare_dataset.csv",
+      "name": "Healthcare Dataset",
+      "category": "healthcare",
+      "description": "Patient admissions data including diagnoses, treatments, and costs",
+      "keywords": ["healthcare", "medical", "patient", "hospital", "treatment", "diagnosis", "medicine", "doctor", "health", "clinic"],
+      "rows": 10,
+      "columns": 9,
+      "features": ["Patient demographics", "Medical diagnosis", "Treatment costs", "Readmission rates"],
+      "use_cases": ["Medical analysis", "Cost optimization", "Patient readmission prediction", "Drug effectiveness"]
+    },
+    {
+      "id": "sales_transaction",
+      "filename": "Sales Transaction v.4a.csv",
+      "name": "Sales Transaction Data",
+      "category": "business",
+      "description": "Product sales transactions with customer and regional information",
+      "keywords": ["business", "sales", "commerce", "retail", "product", "customer", "revenue", "transaction", "corporate", "sales transaction"],
+      "rows": 10,
+      "columns": 9,
+      "features": ["Product sales", "Regional analysis", "Customer segmentation", "Sales performance"],
+      "use_cases": ["Sales forecasting", "Market analysis", "Customer segmentation", "Revenue optimization"]
+    }
+  ]
+}
+

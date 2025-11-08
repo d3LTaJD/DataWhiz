@@ -1,0 +1,1628 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>DataWhiz - Healthcare Analysis</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles/theme.css">
+  <style>
+    :root {
+      --primary: #8b5cf6;
+      --primary-2: #7c3aed;
+      --surface: #1a1a1a;
+      --surface-2: #262626;
+      --surface-3: #333333;
+      --text: #ffffff;
+      --muted: #a3a3a3;
+      --muted-2: #737373;
+      --border: #404040;
+      --success: #10b981;
+      --warning: #f59e0b;
+      --error: #ef4444;
+      --healthcare-primary: #06b6d4;
+      --healthcare-secondary: #0891b2;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--surface);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    .back-button {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px 18px;
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    }
+    
+    .back-button:hover {
+      background: var(--healthcare-primary);
+      color: white;
+      transform: translateX(-4px);
+      box-shadow: 0 4px 12px rgba(6, 182, 212, 0.4);
+    }
+    
+    .analysis-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 80px 20px 20px;
+    }
+
+    .analysis-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .analysis-title {
+      font-size: 2.75rem;
+      font-weight: 800;
+      color: var(--text);
+      margin-bottom: 16px;
+      letter-spacing: -0.5px;
+      line-height: 1.2;
+    }
+
+    .analysis-subtitle {
+      font-size: 1.15rem;
+      color: var(--muted);
+      margin-bottom: 36px;
+      line-height: 1.6;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .data-info-card {
+      background: var(--surface-2);
+      border-radius: 12px;
+      padding: 28px;
+      margin-bottom: 32px;
+      border: 1px solid var(--border);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .data-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 24px;
+      margin-bottom: 20px;
+    }
+
+    .stat-card {
+      background: var(--surface-3);
+      border-radius: 10px;
+      padding: 24px 20px;
+      text-align: center;
+      border: 1px solid var(--border);
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    }
+    
+    .stat-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 6px 16px rgba(6, 182, 212, 0.3);
+      border-color: var(--healthcare-primary);
+    }
+
+    .stat-number {
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: var(--healthcare-primary);
+      margin-bottom: 10px;
+      line-height: 1.2;
+    }
+
+    .stat-label {
+      color: var(--muted);
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .analysis-tabs {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 30px;
+      background: var(--surface-2);
+      padding: 8px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+    }
+
+    .tab-button {
+      flex: 1;
+      padding: 12px 20px;
+      background: transparent;
+      border: none;
+      color: var(--muted);
+      font-weight: 600;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .tab-button.active {
+      background: var(--healthcare-primary);
+      color: white;
+    }
+
+    .tab-button:hover:not(.active) {
+      background: var(--surface-3);
+      color: var(--text);
+    }
+
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+
+    .feature-card {
+      background: var(--surface-2);
+      border-radius: 12px;
+      padding: 28px;
+      border: 1px solid var(--border);
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .feature-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--healthcare-primary);
+      box-shadow: 0 8px 20px rgba(6, 182, 212, 0.2);
+    }
+
+    .feature-icon {
+      font-size: 2.5rem;
+      margin-bottom: 16px;
+      display: block;
+      filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+    }
+
+    .feature-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 10px;
+      line-height: 1.3;
+    }
+
+    .feature-description {
+      color: var(--muted);
+      margin-bottom: 20px;
+      line-height: 1.6;
+      font-size: 0.95rem;
+    }
+
+    .feature-button {
+      width: 100%;
+      padding: 12px 20px;
+      background: var(--healthcare-primary);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .feature-button:hover {
+      background: var(--healthcare-secondary);
+      transform: translateY(-1px);
+    }
+
+    .feature-button:disabled {
+      background: var(--muted-2);
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .progress-section {
+      background: var(--surface-2);
+      border-radius: 12px;
+      padding: 28px;
+      margin-bottom: 32px;
+      border: 1px solid var(--border);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .progress-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 16px;
+    }
+
+    .progress-steps {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+
+    .progress-step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex: 1;
+      position: relative;
+    }
+
+    .progress-step:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      top: 20px;
+      left: 50%;
+      width: 100%;
+      height: 2px;
+      background: var(--border);
+      z-index: 1;
+    }
+
+    .progress-step.completed:not(:last-child)::after {
+      background: var(--success);
+    }
+
+    .step-circle {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--surface-3);
+      border: 3px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: var(--muted);
+      position: relative;
+      z-index: 2;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    }
+
+    .progress-step.completed .step-circle {
+      background: var(--success);
+      border-color: var(--success);
+      color: white;
+      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
+    }
+
+    .progress-step.active .step-circle {
+      background: var(--healthcare-primary);
+      border-color: var(--healthcare-primary);
+      color: white;
+      box-shadow: 0 4px 12px rgba(6, 182, 212, 0.4);
+      animation: pulse 2s infinite;
+    }
+    
+    @keyframes pulse {
+      0%, 100% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.05);
+      }
+    }
+
+    .step-label {
+      margin-top: 8px;
+      font-size: 0.9rem;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    .progress-step.completed .step-label {
+      color: var(--success);
+    }
+
+    .progress-step.active .step-label {
+      color: var(--healthcare-primary);
+    }
+
+    .action-buttons {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      margin-top: 30px;
+    }
+
+    .action-btn {
+      padding: 14px 28px;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: none;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 1rem;
+    }
+
+    .action-btn.primary {
+      background: var(--healthcare-primary);
+      color: white;
+      box-shadow: 0 4px 12px rgba(6, 182, 212, 0.3);
+    }
+
+    .action-btn.primary:hover {
+      background: var(--healthcare-secondary);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(6, 182, 212, 0.4);
+    }
+    
+    .action-btn.primary:active {
+      transform: translateY(0);
+    }
+
+    .action-btn.secondary {
+      background: var(--surface-2);
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+
+    .action-btn.secondary:hover {
+      background: var(--surface-3);
+      transform: translateY(-1px);
+      border-color: var(--healthcare-primary);
+    }
+
+    .loading {
+      display: none;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .loading.active {
+      display: block;
+    }
+
+    .spinner {
+      width: 40px;
+      height: 40px;
+      border: 4px solid var(--border);
+      border-top: 4px solid var(--healthcare-primary);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 16px;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .status-message {
+      padding: 16px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      font-weight: 600;
+    }
+
+    .status-message.success {
+      background: rgba(16, 185, 129, 0.1);
+      border: 1px solid var(--success);
+      color: var(--success);
+    }
+
+    .status-message.error {
+      background: rgba(239, 68, 68, 0.1);
+      border: 1px solid var(--error);
+      color: var(--error);
+    }
+
+    .status-message.info {
+      background: rgba(6, 182, 212, 0.1);
+      border: 1px solid var(--healthcare-primary);
+      color: var(--healthcare-primary);
+    }
+
+    .auto-processing-status {
+      background: var(--surface-2);
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 30px;
+      border: 1px solid var(--border);
+    }
+
+    .status-header h3 {
+      color: var(--text);
+      margin-bottom: 8px;
+      font-size: 1.3rem;
+    }
+
+    .status-header p {
+      color: var(--muted);
+      margin-bottom: 20px;
+    }
+
+    .processing-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .processing-step {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 16px;
+      background: var(--surface-3);
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      transition: all 0.3s ease;
+    }
+    
+    .processing-step:hover {
+      transform: translateX(4px);
+    }
+
+    .processing-step.completed {
+      background: rgba(16, 185, 129, 0.1);
+      border-color: var(--success);
+    }
+
+    .processing-step.active {
+      background: rgba(6, 182, 212, 0.1);
+      border-color: var(--healthcare-primary);
+    }
+
+    .step-icon {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.8rem;
+    }
+
+    .processing-step.completed .step-icon {
+      background: var(--success);
+      color: white;
+    }
+
+    .processing-step.active .step-icon {
+      background: var(--healthcare-primary);
+      color: white;
+    }
+
+    .processing-step.pending .step-icon {
+      background: var(--surface-3);
+      color: var(--muted);
+    }
+
+    .step-text {
+      flex: 1;
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    .processing-step.completed .step-text {
+      color: var(--success);
+    }
+
+    .processing-step.active .step-text {
+      color: var(--healthcare-primary);
+    }
+
+    .auto-processing-message {
+      background: var(--surface-2);
+      border-radius: 12px;
+      padding: 40px;
+      text-align: center;
+      border: 1px solid var(--border);
+      margin-bottom: 20px;
+    }
+
+    .auto-processing-message h3 {
+      color: var(--text);
+      font-size: 1.5rem;
+      margin-bottom: 16px;
+    }
+
+    .auto-processing-message p {
+      color: var(--muted);
+      font-size: 1.1rem;
+      line-height: 1.6;
+    }
+
+    .main-processing-section {
+      margin-bottom: 30px;
+    }
+
+    .processing-card {
+      background: var(--surface-2);
+      border-radius: 12px;
+      padding: 36px;
+      border: 1px solid var(--border);
+      margin-bottom: 24px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .processing-header {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    .processing-header h3 {
+      color: var(--text);
+      font-size: 1.9rem;
+      margin-bottom: 14px;
+      font-weight: 700;
+      line-height: 1.3;
+    }
+
+    .processing-header p {
+      color: var(--muted);
+      font-size: 1.1rem;
+      line-height: 1.6;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+      margin-bottom: 32px;
+    }
+
+    .info-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 18px;
+      padding: 24px;
+      background: var(--surface-3);
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    }
+    
+    .info-item:hover {
+      transform: translateY(-2px);
+      border-color: var(--healthcare-primary);
+      box-shadow: 0 4px 12px rgba(6, 182, 212, 0.2);
+    }
+
+    .info-icon {
+      font-size: 2.2rem;
+      flex-shrink: 0;
+      filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+    }
+
+    .info-text h4 {
+      color: var(--text);
+      font-size: 1.15rem;
+      margin-bottom: 10px;
+      font-weight: 700;
+      line-height: 1.3;
+    }
+
+    .info-text p {
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    .processing-actions {
+      text-align: center;
+    }
+
+    .process-btn {
+      background: var(--healthcare-primary);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      padding: 18px 40px;
+      font-size: 1.15rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      box-shadow: 0 4px 16px rgba(6, 182, 212, 0.4);
+    }
+
+    .process-btn:hover {
+      background: var(--healthcare-secondary);
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(6, 182, 212, 0.5);
+    }
+    
+    .process-btn:active {
+      transform: translateY(-1px);
+    }
+
+    .process-btn:disabled {
+      background: var(--muted-2);
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    .btn-icon {
+      font-size: 1.2rem;
+    }
+
+    .processing-status {
+      background: var(--surface-2);
+      border-radius: 12px;
+      padding: 36px;
+      border: 1px solid var(--border);
+      margin-bottom: 24px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .status-header {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    .status-header h3 {
+      color: var(--text);
+      font-size: 1.5rem;
+      margin-bottom: 8px;
+    }
+
+    .status-header p {
+      color: var(--muted);
+      font-size: 1rem;
+    }
+
+    .processing-summary {
+      background: var(--surface-2);
+      border-radius: 12px;
+      padding: 36px;
+      border: 2px solid var(--success);
+      margin-bottom: 24px;
+      box-shadow: 0 4px 16px rgba(16, 185, 129, 0.2);
+    }
+
+    .summary-header {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    .summary-header h3 {
+      color: var(--success);
+      font-size: 1.5rem;
+      margin-bottom: 8px;
+    }
+
+    .summary-header p {
+      color: var(--muted);
+      font-size: 1rem;
+    }
+
+    .summary-content {
+      margin-bottom: 24px;
+    }
+
+    .summary-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--border);
+      transition: all 0.2s ease;
+    }
+    
+    .summary-item:hover {
+      background: rgba(6, 182, 212, 0.05);
+      margin: 0 -16px;
+      padding-left: 16px;
+      padding-right: 16px;
+      border-radius: 6px;
+    }
+
+    .summary-item:last-child {
+      border-bottom: none;
+    }
+
+    .summary-label {
+      color: var(--text);
+      font-weight: 500;
+      font-size: 1rem;
+    }
+
+    .summary-value {
+      color: var(--healthcare-primary);
+      font-weight: 700;
+      font-size: 1.1rem;
+    }
+
+    .summary-actions {
+      text-align: center;
+    }
+
+    .analysis-btn {
+      background: var(--success);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      padding: 18px 40px;
+      font-size: 1.15rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      box-shadow: 0 4px 16px rgba(16, 185, 129, 0.4);
+    }
+
+    .analysis-btn:hover {
+      background: #059669;
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(16, 185, 129, 0.5);
+    }
+    
+    .analysis-btn:active {
+      transform: translateY(-1px);
+    }
+  </style>
+</head>
+<body>
+  <a href="../data-preview.html" class="back-button">← Back to Data Preview</a>
+  
+  <div class="analysis-container">
+    <div class="analysis-header">
+      <h1 class="analysis-title">🏥 Healthcare Analysis Workspace</h1>
+      <p class="analysis-subtitle">Clean, transform, and analyze your healthcare data for medical insights and patient outcomes</p>
+    </div>
+
+    <!-- Data Information Card -->
+    <div class="data-info-card" id="dataInfoCard">
+      <h3 style="margin-bottom: 16px; color: var(--text);">📊 Your Healthcare Dataset</h3>
+      <div class="data-stats" id="dataStats">
+        <!-- Stats will be populated by JavaScript -->
+      </div>
+    </div>
+
+    <!-- Progress Section -->
+    <div class="progress-section">
+      <h3 class="progress-title">Analysis Progress</h3>
+      <div class="progress-steps">
+        <div class="progress-step active" id="step1">
+          <div class="step-circle">1</div>
+          <div class="step-label">Data Loaded</div>
+        </div>
+        <div class="progress-step" id="step2">
+          <div class="step-circle">2</div>
+          <div class="step-label">Data Cleaning</div>
+        </div>
+        <div class="progress-step" id="step3">
+          <div class="step-circle">3</div>
+          <div class="step-label">Data Transformation</div>
+        </div>
+        <div class="progress-step" id="step4">
+          <div class="step-circle">4</div>
+          <div class="step-label">Healthcare Analysis</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Processing Section -->
+    <div class="main-processing-section">
+      <div class="processing-card" id="processingCard">
+        <div class="processing-header">
+          <h3>🧹 Healthcare Data Cleaning & Transformation</h3>
+          <p>Clean your medical data and add healthcare-specific metrics automatically</p>
+        </div>
+        
+        <div class="processing-info">
+          <div class="info-grid">
+            <div class="info-item">
+              <div class="info-icon">🔍</div>
+              <div class="info-text">
+                <h4>Data Quality Check</h4>
+                <p>Analyze missing values, duplicates, and data consistency in medical records</p>
+              </div>
+            </div>
+            <div class="info-item">
+              <div class="info-icon">🧽</div>
+              <div class="info-text">
+                <h4>Clean Missing Data</h4>
+                <p>Handle missing values with medical-appropriate imputation methods</p>
+              </div>
+            </div>
+            <div class="info-item">
+              <div class="info-icon">🔄</div>
+              <div class="info-text">
+                <h4>Remove Duplicates</h4>
+                <p>Eliminate duplicate patient records for accuracy</p>
+              </div>
+            </div>
+            <div class="info-item">
+              <div class="info-icon">➕</div>
+              <div class="info-text">
+                <h4>Add Healthcare Metrics</h4>
+                <p>Calculate patient outcomes, treatment efficacy, and clinical KPIs</p>
+              </div>
+            </div>
+            <div class="info-item">
+              <div class="info-icon">📅</div>
+              <div class="info-text">
+                <h4>Date Features</h4>
+                <p>Extract admission dates, treatment periods, and follow-up intervals</p>
+              </div>
+            </div>
+            <div class="info-item">
+              <div class="info-icon">🏷️</div>
+              <div class="info-text">
+                <h4>Encode Categories</h4>
+                <p>Convert medical categories and diagnoses to analyzable formats</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="processing-actions">
+          <button class="process-btn" id="processBtn" onclick="startProcessing()">
+            <span class="btn-icon">🚀</span>
+            <span class="btn-text">Clean & Transform Healthcare Data</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Processing Status -->
+      <div class="processing-status" id="processingStatus" style="display: none;">
+        <div class="status-header">
+          <h3>🤖 Processing Your Healthcare Data...</h3>
+          <p>DataWhiz is automatically cleaning and transforming your medical data</p>
+        </div>
+        <div class="processing-steps" id="processingSteps">
+          <!-- Processing steps will be populated by JavaScript -->
+        </div>
+      </div>
+
+      <!-- Processing Summary -->
+      <div class="processing-summary" id="processingSummary" style="display: none;">
+        <div class="summary-header">
+          <h3>✅ Healthcare Data Processing Complete!</h3>
+          <p>Here's what DataWhiz has done to your medical data:</p>
+        </div>
+        <div class="summary-content" id="summaryContent">
+          <!-- Summary will be populated by JavaScript -->
+        </div>
+        <div class="summary-actions">
+          <button class="analysis-btn" id="analysisBtn" onclick="proceedToAnalysis()">
+            <span class="btn-icon">📊</span>
+            <span class="btn-text">View Healthcare Analytics</span>
+          </button>
+        </div>
+          </div>
+        </div>
+
+    <!-- Loading Section -->
+    <div class="loading" id="loadingSection">
+      <div class="spinner"></div>
+      <p>Processing your healthcare data...</p>
+    </div>
+
+    <!-- Status Messages -->
+    <div id="statusMessages"></div>
+
+  </div>
+
+  <script>
+    // Get data from localStorage
+    const mergedData = JSON.parse(localStorage.getItem('mergedData') || '{}');
+    let currentStep = 1;
+    let analysisResults = {};
+    let processingSummaryResults = {}; // Global object to store summary results
+
+    // Initialize the page
+    document.addEventListener('DOMContentLoaded', function() {
+      console.log('🏥 Healthcare Analysis page loaded');
+      console.log('📊 Merged data:', mergedData);
+      
+      populateDataInfo();
+      updateProgress();
+      
+      // Don't auto-start - wait for user to click the button
+    });
+
+    function populateDataInfo() {
+      if (!mergedData.merged_file) {
+        showStatus('No data found. Please go back and upload files.', 'error');
+        return;
+      }
+
+      const statsContainer = document.getElementById('dataStats');
+      statsContainer.innerHTML = `
+        <div class="stat-card">
+          <div class="stat-number">${mergedData.merged_file.total_rows.toLocaleString()}</div>
+          <div class="stat-label">Total Records</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">${mergedData.merged_file.total_columns}</div>
+          <div class="stat-label">Data Fields</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">${mergedData.uploaded_files.length}</div>
+          <div class="stat-label">Files Merged</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">Healthcare</div>
+          <div class="stat-label">Analysis Type</div>
+        </div>
+      `;
+    }
+
+    function switchTab(tabName) {
+      // Remove active class from all tabs and content
+      document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
+      document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+      
+      // Add active class to selected tab and content
+      document.querySelector(`[onclick="switchTab('${tabName}')"]`).classList.add('active');
+      document.getElementById(`${tabName}-tab`).classList.add('active');
+    }
+
+    function updateProgress() {
+      // Update progress steps based on current step
+      for (let i = 1; i <= 4; i++) {
+        const step = document.getElementById(`step${i}`);
+        if (i < currentStep) {
+          step.classList.add('completed');
+          step.classList.remove('active');
+        } else if (i === currentStep) {
+          step.classList.add('active');
+          step.classList.remove('completed');
+        } else {
+          step.classList.remove('active', 'completed');
+        }
+      }
+    }
+
+    function showLoading(show = true) {
+      const loadingSection = document.getElementById('loadingSection');
+      if (show) {
+        loadingSection.classList.add('active');
+      } else {
+        loadingSection.classList.remove('active');
+      }
+    }
+
+    function showStatus(message, type = 'info') {
+      const statusContainer = document.getElementById('statusMessages');
+      const statusDiv = document.createElement('div');
+      statusDiv.className = `status-message ${type}`;
+      statusDiv.textContent = message;
+      statusContainer.appendChild(statusDiv);
+      
+      // Auto-remove after 5 seconds
+      setTimeout(() => {
+        statusDiv.remove();
+      }, 5000);
+    }
+
+    // Auto-run data cleaning sequence
+    function autoRunDataCleaning() {
+      console.log('🧹 Starting auto healthcare data cleaning sequence...');
+      showLoading(true);
+      showAutoProcessingStatus();
+      
+      // Step 1: Quality Check
+      console.log('⏰ Step 1: Quality check in 1 second...');
+      setTimeout(() => {
+        console.log('🔍 Running healthcare quality check...');
+        updateProcessingStep('quality-check', 'active');
+        runDataQualityCheck();
+      }, 1000);
+    }
+
+    // Auto-run data transformation
+    function autoRunDataTransformation() {
+      console.log('🔄 Starting auto healthcare data transformation...');
+      updateProcessingStep('transform', 'active');
+      
+      // Call the actual backend transformation API
+      const filename = mergedData.merged_file.filename;
+      console.log('📁 Transforming healthcare file:', filename);
+      
+      // Send transformation options to actually generate new columns
+      const transformOptions = {
+        add_healthcare_metrics: true,
+        add_date_features: true,
+        encode_categoricals: true
+      };
+      
+      fetch('http://localhost:5000/api/healthcare/transform-data', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ filename: filename, options: transformOptions })
+      })
+      .then(response => {
+        console.log('📡 Transform data response status:', response.status);
+        return response.json();
+      })
+      .then(data => {
+        console.log('📊 Transform data response:', data);
+        if (data.success) {
+          console.log('✅ Healthcare data transformation completed:', data);
+          
+          // Store REAL transformation results
+          processingSummaryResults.newMetrics = data.data.newMetrics || 0;
+          processingSummaryResults.totalColumns = data.data.totalColumns || 'N/A';
+          processingSummaryResults.dateFeatures = data.data.dateFeatures || 0;
+          processingSummaryResults.categoriesEncoded = data.data.categoriesEncoded || 0;
+          
+          console.log('📊 REAL transformation results stored:');
+          console.log('- New columns added:', data.data.newMetrics || 0);
+          console.log('- Total columns:', data.data.totalColumns || 'N/A');
+          console.log('- Date features extracted:', data.data.dateFeatures || 0);
+          console.log('- Categories encoded:', data.data.categoriesEncoded || 0);
+          
+          // CRITICAL FIX: Update the filename to use the transformed file for subsequent steps
+          if (data.data.transformed_filename) {
+            mergedData.merged_file.filename = data.data.transformed_filename;
+            mergedData.merged_file.total_columns = data.data.totalColumns;
+            console.log('🔄 Updated filename to transformed file:', data.data.transformed_filename);
+            console.log('📊 Updated column count to:', data.data.totalColumns);
+            
+            // Store the transformed filename for later use
+            mergedData.transformed_file = {
+              filename: data.data.transformed_filename,
+              total_rows: mergedData.merged_file.total_rows,
+              total_columns: data.data.totalColumns
+            };
+            
+            // Update localStorage to persist the change
+            localStorage.setItem('mergedData', JSON.stringify(mergedData));
+            console.log('💾 Updated mergedData in localStorage');
+          }
+          
+          // Move to final step: Healthcare Analysis
+          console.log('⏰ Moving to final step: Healthcare analysis in 2 seconds...');
+          setTimeout(() => {
+            console.log('📊 Starting healthcare analysis...');
+            updateProcessingStep('transform', 'completed');
+            updateProcessingStep('analyze', 'active');
+            autoRunHealthcareAnalysis();
+          }, 2000);
+        } else {
+          console.error('❌ Healthcare data transformation failed:', data.error);
+          showStatus('Healthcare data transformation failed: ' + data.error, 'error');
+        }
+      })
+      .catch(error => {
+        console.error('❌ Healthcare data transformation error:', error);
+        showStatus('Failed to transform healthcare data: ' + error.message, 'error');
+      });
+    }
+
+    // Auto-run healthcare analysis
+    function autoRunHealthcareAnalysis() {
+      console.log('📊 Starting auto healthcare analysis...');
+      updateProcessingStep('analyze', 'active');
+      
+      // Call the actual backend healthcare analysis API
+      const filename = mergedData.merged_file.filename;
+      console.log('📁 Analyzing healthcare file:', filename);
+      
+      fetch('http://localhost:5000/api/healthcare/analyze', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ 
+          filename: filename,
+          analysis_type: 'healthcare'
+        })
+      })
+      .then(response => {
+        console.log('📡 Healthcare analysis response status:', response.status);
+        return response.json();
+      })
+      .then(data => {
+        console.log('📊 Healthcare analysis response:', data);
+        if (data.success) {
+          console.log('✅ Healthcare analysis completed:', data);
+          updateProcessingStep('analyze', 'completed');
+          
+          // Show processing summary with REAL results from processingSummaryResults
+          console.log('📊 Showing processing summary with REAL accumulated results:', processingSummaryResults);
+          console.log('🔍 DEBUG: Final processingSummaryResults before display:', {
+            qualityScore: processingSummaryResults.qualityScore,
+            missingCleaned: processingSummaryResults.missingCleaned,
+            duplicatesRemoved: processingSummaryResults.duplicatesRemoved,
+            newMetrics: processingSummaryResults.newMetrics,
+            totalColumns: processingSummaryResults.totalColumns
+          });
+          showProcessingSummary(processingSummaryResults);
+        } else {
+          console.error('❌ Healthcare analysis failed:', data.error);
+          showStatus('Healthcare analysis failed: ' + data.error, 'error');
+        }
+      })
+      .catch(error => {
+        console.error('❌ Healthcare analysis error:', error);
+        showStatus('Failed to run healthcare analysis: ' + error.message, 'error');
+      });
+    }
+
+    // Data Cleaning Functions
+    function runDataQualityCheck() {
+      console.log('🔍 Starting healthcare data quality check...');
+      showLoading(true);
+      
+      const filename = mergedData.merged_file.filename;
+      console.log('📁 Using filename:', filename);
+      
+      fetch('http://localhost:5000/api/healthcare/quality-check', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ filename: filename })
+      })
+      .then(response => {
+        console.log('📡 Quality check response status:', response.status);
+        return response.json();
+      })
+      .then(data => {
+        console.log('📊 Quality check response:', data);
+        showLoading(false);
+        if (data.success) {
+          const report = data.data;  // The quality report is in data.data, not data.quality_report
+          console.log('✅ Healthcare quality check completed:', report);
+          
+          // Store REAL quality check results
+          processingSummaryResults.qualityScore = report.quality_score + '%';
+          processingSummaryResults.totalColumns = report.total_columns;
+          
+          // Store initial counts for reference
+          processingSummaryResults.initialMissingValues = Object.values(report.missing_values).reduce((a, b) => a + b, 0);
+          processingSummaryResults.initialDuplicateRows = report.duplicate_rows;
+          
+          console.log('🔍 DEBUG: Healthcare quality check results stored:', {
+            qualityScore: processingSummaryResults.qualityScore,
+            initialMissingValues: processingSummaryResults.initialMissingValues,
+            initialDuplicateRows: processingSummaryResults.initialDuplicateRows,
+            totalColumns: processingSummaryResults.totalColumns
+          });
+          
+          currentStep = 2;
+          updateProgress();
+          
+          // Move to next step: Clean Missing Values
+          console.log('⏰ Moving to next step: Clean missing values in 2 seconds...');
+          setTimeout(() => {
+            console.log('🧽 Cleaning missing values...');
+            updateProcessingStep('quality-check', 'completed');
+            updateProcessingStep('clean-missing', 'active');
+            cleanMissingValues();
+          }, 2000);
+        } else {
+          console.error('❌ Healthcare quality check failed:', data.error);
+          showStatus('Healthcare quality check failed: ' + data.error, 'error');
+        }
+      })
+      .catch(error => {
+        console.error('❌ Healthcare quality check error:', error);
+        showLoading(false);
+        showStatus('Failed to run healthcare quality check: ' + error.message, 'error');
+      });
+    }
+
+    function cleanMissingValues() {
+      showLoading(true);
+      
+      const filename = mergedData.merged_file.filename;
+      const options = {
+        handle_missing: 'fill',
+        fill_method: 'mean',
+        remove_duplicates: true,
+        standardize_formats: true
+      };
+      
+      fetch('http://localhost:5000/api/healthcare/clean-data', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ filename: filename, options: options })
+      })
+      .then(response => response.json())
+      .then(data => {
+        console.log('📊 Clean healthcare data response:', data);
+        console.log('🔍 DEBUG: Clean healthcare data response details:', {
+          success: data.success,
+          rows_removed: data.rows_removed,
+          missing_values_found: data.missing_values_found,
+          duplicate_rows_found: data.duplicate_rows_found,
+          cleaned_file: data.cleaned_file,
+          cleaned_rows: data.cleaned_rows
+        });
+        showLoading(false);
+        if (data.success) {
+          console.log('✅ Healthcare data cleaning completed:', data);
+          
+          // Store REAL cleaning results with separate counts
+          processingSummaryResults.missingCleaned = data.data.missingCleaned || 0;
+          processingSummaryResults.duplicatesRemoved = data.data.duplicatesRemoved || 0;
+          
+          // CRITICAL FIX: Update the filename to use the cleaned file for subsequent steps
+          if (data.data.cleaned_filename) {
+            mergedData.merged_file.filename = data.data.cleaned_filename;
+            mergedData.merged_file.total_rows = data.data.rows_after_cleaning;
+            console.log('🔄 Updated filename to cleaned file:', data.data.cleaned_filename);
+            console.log('📊 Updated row count to:', data.data.rows_after_cleaning);
+            
+            // Update localStorage to persist the change
+            localStorage.setItem('mergedData', JSON.stringify(mergedData));
+            console.log('💾 Updated mergedData in localStorage');
+          }
+          
+          console.log('🔍 DEBUG: Healthcare cleaning results stored:', {
+            missingCleaned: processingSummaryResults.missingCleaned,
+            duplicatesRemoved: processingSummaryResults.duplicatesRemoved
+          });
+          
+          // DEBUG: Check if the values are actually being set
+          console.log('🔍 DEBUG: processingSummaryResults after cleaning:', processingSummaryResults);
+          
+          // Move to next step: Remove Duplicates
+          console.log('⏰ Moving to next step: Remove duplicates in 2 seconds...');
+          setTimeout(() => {
+            console.log('🔄 Removing duplicates...');
+            updateProcessingStep('clean-missing', 'completed');
+            updateProcessingStep('remove-duplicates', 'active');
+            removeDuplicates();
+          }, 2000);
+        } else {
+          console.error('❌ Healthcare data cleaning failed:', data.error);
+          showStatus('Healthcare data cleaning failed: ' + data.error, 'error');
+        }
+      })
+      .catch(error => {
+        showLoading(false);
+        showStatus('Failed to clean healthcare data: ' + error.message, 'error');
+      });
+    }
+
+    function removeDuplicates() {
+      console.log('🔄 Starting duplicate removal...');
+      showLoading(true);
+      
+      // This is handled by the clean-data API, so we just mark it as completed
+      setTimeout(() => {
+        console.log('✅ Duplicate removal completed (handled by clean-data API)');
+        showLoading(false);
+        
+        // Move to next step: Standardize Formats
+        console.log('⏰ Moving to next step: Standardize formats in 2 seconds...');
+        setTimeout(() => {
+          console.log('📏 Standardizing formats...');
+          updateProcessingStep('remove-duplicates', 'completed');
+          updateProcessingStep('standardize', 'active');
+          standardizeFormats();
+        }, 2000);
+      }, 1200);
+    }
+
+    function standardizeFormats() {
+      console.log('📏 Starting format standardization...');
+      showLoading(true);
+      
+      // This is also handled by the clean-data API, so we just mark it as completed
+      setTimeout(() => {
+        console.log('✅ Format standardization completed (handled by clean-data API)');
+        showLoading(false);
+        
+        // Move to next step: Data Transformation
+        console.log('⏰ Moving to next step: Data transformation in 2 seconds...');
+        setTimeout(() => {
+          console.log('🔄 Starting healthcare data transformation...');
+          updateProcessingStep('standardize', 'completed');
+          updateProcessingStep('transform', 'active');
+          autoRunDataTransformation();
+        }, 2000);
+      }, 1800);
+    }
+
+    // Data Transformation Functions
+    function addHealthcareMetrics() {
+      showLoading(true);
+      
+      const filename = mergedData.merged_file.filename;
+      const options = {
+        add_healthcare_metrics: true,
+        add_date_features: true,
+        encode_categoricals: true
+      };
+      
+      fetch('http://localhost:5000/api/healthcare/transform-data', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ filename: filename, options: options })
+      })
+      .then(response => response.json())
+      .then(data => {
+        showLoading(false);
+        if (data.success) {
+          currentStep = 3;
+          updateProgress();
+        } else {
+          showStatus('Healthcare transformation failed: ' + data.error, 'error');
+        }
+      })
+      .catch(error => {
+        showLoading(false);
+        showStatus('Failed to transform healthcare data: ' + error.message, 'error');
+      });
+    }
+
+    function addDateTimeFeatures() {
+      showLoading(true);
+      
+      setTimeout(() => {
+        showLoading(false);
+      }, 2000);
+    }
+
+    function encodeCategoricals() {
+      showLoading(true);
+      
+      setTimeout(() => {
+        showLoading(false);
+      }, 1600);
+    }
+
+    function aggregateData() {
+      showLoading(true);
+      
+      setTimeout(() => {
+        showLoading(false);
+      }, 2200);
+    }
+
+    // Healthcare Analysis Functions
+    function runPatientAnalytics() {
+      showLoading(true);
+      
+      const filename = mergedData.merged_file.filename;
+      
+      fetch('http://localhost:5000/api/healthcare/analyze', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ filename: filename, analysis_type: 'patient' })
+      })
+      .then(response => response.json())
+      .then(data => {
+        showLoading(false);
+        if (data.success) {
+          const results = data.results;
+          currentStep = 4;
+          updateProgress();
+          document.getElementById('proceedBtn').disabled = false;
+        } else {
+          showStatus('Patient analytics failed: ' + data.error, 'error');
+        }
+      })
+      .catch(error => {
+        showLoading(false);
+        showStatus('Failed to run patient analytics: ' + error.message, 'error');
+      });
+    }
+
+    function runClinicalOutcomes() {
+      showLoading(true);
+      
+      setTimeout(() => {
+        showLoading(false);
+      }, 2800);
+    }
+
+    function runDrugAnalysis() {
+      showLoading(true);
+      
+      setTimeout(() => {
+        showLoading(false);
+      }, 2600);
+    }
+
+    function createCostAnalysis() {
+      showLoading(true);
+      
+      setTimeout(() => {
+        showLoading(false);
+      }, 3200);
+    }
+
+    function showAutoProcessingStatus() {
+      console.log('🔧 Setting up healthcare processing status display...');
+      
+      const statusDiv = document.getElementById('processingStatus');
+      const stepsDiv = document.getElementById('processingSteps');
+      
+      // Check if elements exist
+      if (!statusDiv) {
+        console.error('❌ processingStatus element not found!');
+        return;
+      }
+      
+      if (!stepsDiv) {
+        console.error('❌ processingSteps element not found!');
+        return;
+      }
+      
+      console.log('✅ Processing status elements found');
+      statusDiv.style.display = 'block';
+      
+      stepsDiv.innerHTML = `
+        <div class="processing-step pending" id="quality-check">
+          <div class="step-icon">1</div>
+          <div class="step-text">Running healthcare data quality check...</div>
+        </div>
+        <div class="processing-step pending" id="clean-missing">
+          <div class="step-icon">2</div>
+          <div class="step-text">Cleaning missing medical values...</div>
+        </div>
+        <div class="processing-step pending" id="remove-duplicates">
+          <div class="step-icon">3</div>
+          <div class="step-text">Removing duplicate patient records...</div>
+        </div>
+        <div class="processing-step pending" id="standardize">
+          <div class="step-icon">4</div>
+          <div class="step-text">Standardizing medical data formats...</div>
+        </div>
+        <div class="processing-step pending" id="transform">
+          <div class="step-icon">5</div>
+          <div class="step-text">Adding healthcare metrics and features...</div>
+        </div>
+        <div class="processing-step pending" id="analyze">
+          <div class="step-icon">6</div>
+          <div class="step-text">Finalizing healthcare data transformation...</div>
+        </div>
+      `;
+      
+      console.log('✅ Healthcare processing steps HTML created');
+    }
+
+    function updateProcessingStep(stepId, status) {
+      const step = document.getElementById(stepId);
+      if (step) {
+        step.className = `processing-step ${status}`;
+        
+        if (status === 'completed') {
+          step.querySelector('.step-icon').textContent = '✓';
+        } else if (status === 'active') {
+          step.querySelector('.step-icon').textContent = '⟳';
+        }
+      }
+    }
+
+    // New simplified workflow functions
+    function startProcessing() {
+      console.log('🎯 Starting healthcare processing workflow...');
+      
+      // Check if we have data
+      if (!mergedData.merged_file) {
+        console.error('❌ No merged data found!');
+        showStatus('No data found. Please go back and upload files.', 'error');
+        return;
+      }
+      
+      console.log('✅ Merged data found:', mergedData.merged_file);
+      
+      // Hide processing card and show status
+      document.getElementById('processingCard').style.display = 'none';
+      document.getElementById('processingStatus').style.display = 'block';
+      
+      // Show processing steps immediately
+      showAutoProcessingStatus();
+      
+      // Start the processing sequence
+      console.log('🚀 Starting healthcare data cleaning sequence...');
+      autoRunDataCleaning();
+    }
+
+    function showProcessingSummary(results) {
+      console.log('🔍 DEBUG: showProcessingSummary received results:', results);
+      console.log('🔍 DEBUG: processingSummaryResults global object:', processingSummaryResults);
+      console.log('🔍 DEBUG: Individual values being passed:');
+      console.log('- qualityScore:', results.qualityScore);
+      console.log('- missingCleaned:', results.missingCleaned);
+      console.log('- duplicatesRemoved:', results.duplicatesRemoved);
+      console.log('- newMetrics:', results.newMetrics);
+      console.log('- totalColumns:', results.totalColumns);
+      
+      // Store processing results in localStorage for the preview page
+      localStorage.setItem('processingSummaryResults', JSON.stringify(results));
+      console.log('💾 Stored processing results in localStorage:', results);
+      
+      // Hide processing status and show summary
+      document.getElementById('processingStatus').style.display = 'none';
+      document.getElementById('processingSummary').style.display = 'block';
+      
+      // Populate summary content with ONLY real data - NO FAKE VALUES
+      console.log('📊 Summary results received:', results);
+      const summaryContent = document.getElementById('summaryContent');
+      summaryContent.innerHTML = `
+        <div class="summary-item">
+          <span class="summary-label">Healthcare Data Quality Score</span>
+          <span class="summary-value">${results.qualityScore || 'N/A'}</span>
+        </div>
+        <div class="summary-item">
+          <span class="summary-label">Missing Medical Values Cleaned</span>
+          <span class="summary-value">${results.missingCleaned !== undefined ? results.missingCleaned : 'N/A'}</span>
+        </div>
+        <div class="summary-item">
+          <span class="summary-label">Duplicate Patient Records Removed</span>
+          <span class="summary-value">${results.duplicatesRemoved || 'N/A'}</span>
+        </div>
+        <div class="summary-item">
+          <span class="summary-label">New Healthcare Metrics Added</span>
+          <span class="summary-value">${results.newMetrics || 'N/A'}</span>
+        </div>
+        <div class="summary-item">
+          <span class="summary-label">Date Features Extracted</span>
+          <span class="summary-value">${results.dateFeatures || 'N/A'}</span>
+        </div>
+        <div class="summary-item">
+          <span class="summary-label">Medical Categories Encoded</span>
+          <span class="summary-value">${results.categoriesEncoded || 'N/A'}</span>
+        </div>
+        <div class="summary-item">
+          <span class="summary-label">Total Data Fields</span>
+          <span class="summary-value">${results.totalColumns || 'N/A'}</span>
+  </div>
+      `;
+      
+      console.log('📊 Summary values set:');
+      console.log('- Quality Score:', results.qualityScore || 'N/A');
+      console.log('- Missing Cleaned:', results.missingCleaned !== undefined ? results.missingCleaned : 'N/A');
+      console.log('- Duplicates Removed:', results.duplicatesRemoved || 'N/A');
+      console.log('- New Metrics:', results.newMetrics || 'N/A');
+      console.log('- Total Columns:', results.totalColumns || 'N/A');
+    }
+
+    function proceedToAnalysis() {
+        setTimeout(() => {
+            window.location.href = '../transformed-data-preview.html';
+        }, 1000);
+    }
+
+  </script>
+</body>
+</html>

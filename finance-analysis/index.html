@@ -1,0 +1,78 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>DataWhiz - Finance Analysis</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles/theme.css">
+  <style>
+    .back-button {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px 16px;
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .back-button:hover {
+      background: var(--primary);
+      color: white;
+      transform: translateX(-2px);
+    }
+    
+    .brand .subtitle {
+      font-size: 0.8rem;
+      color: var(--muted-2);
+      margin-top: 4px;
+    }
+  </style>
+</head>
+<body>
+  <a href="../analysis.html" class="back-button">← Back to Analysis Types</a>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="logo">DW</div>
+        <div class="title">DataWhiz</div>
+        <div class="subtitle">Finance Analysis</div>
+      </div>
+      <nav class="nav">
+        <div class="item active">💰 Dashboard</div>
+        <div class="item">📈 Portfolio Analysis</div>
+        <div class="item">⚠️ Risk Assessment</div>
+        <div class="item">📊 Market Analysis</div>
+        <div class="item">🔮 Forecasting</div>
+        <div class="item">💹 Trading Tools</div>
+      </nav>
+    </aside>
+    
+    <main style="flex:1; display:flex; flex-direction:column;">
+      <header class="header">
+        <div style="width:20px;"></div>
+        <div class="search"><input placeholder="Search financial data..." /></div>
+        <div style="width:20px;"></div>
+        <button class="btn ghost">🌙 Toggle Theme</button>
+      </header>
+      
+      <section class="content">
+        <div class="container">
+          <div class="card">
+            <h1>Finance & Market Analysis Dashboard</h1>
+            <p>Welcome to your financial analytics workspace. Upload your financial data to get started.</p>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+</body>
+</html>

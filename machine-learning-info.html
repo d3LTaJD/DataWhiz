@@ -1,0 +1,426 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>DataWhiz Machine Learning - Detailed Information</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles/theme.css">
+  <style>
+    .info-section {
+      margin-bottom: 48px;
+      padding: 32px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
+      border-radius: 16px;
+      border: 1px solid var(--divider);
+    }
+    .info-section h2 {
+      color: var(--primary);
+      margin-bottom: 16px;
+      font-size: 24px;
+    }
+    .info-section h3 {
+      color: var(--muted);
+      margin-top: 24px;
+      margin-bottom: 12px;
+      font-size: 18px;
+    }
+    .info-section p {
+      color: var(--muted-2);
+      line-height: 1.8;
+      margin-bottom: 16px;
+    }
+    .info-section ul {
+      color: var(--muted-2);
+      line-height: 1.8;
+      margin: 16px 0;
+      padding-left: 24px;
+    }
+    .info-section li {
+      margin-bottom: 8px;
+    }
+    .model-card {
+      background: rgba(108,99,255,0.05);
+      border-left: 3px solid var(--primary);
+      padding: 24px;
+      margin: 20px 0;
+      border-radius: 8px;
+    }
+    .model-card h4 {
+      color: var(--primary);
+      margin: 0 0 8px 0;
+      font-size: 20px;
+    }
+    .model-card p {
+      margin: 8px 0;
+    }
+    .stat-card {
+      display: inline-block;
+      background: rgba(108,99,255,0.1);
+      border: 1px solid rgba(108,99,255,0.2);
+      padding: 16px 24px;
+      border-radius: 12px;
+      margin: 8px;
+    }
+    .stat-card strong {
+      display: block;
+      font-size: 28px;
+      color: var(--primary);
+      margin-bottom: 4px;
+    }
+    .stat-card span {
+      font-size: 14px;
+      color: var(--muted-2);
+    }
+    .application-card {
+      background: rgba(0,201,167,0.05);
+      border-left: 3px solid var(--accent);
+      padding: 24px;
+      margin: 20px 0;
+      border-radius: 8px;
+    }
+    .application-card h4 {
+      color: var(--accent);
+      margin: 0 0 8px 0;
+      font-size: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="logo">
+          <img src="mind-map.png" alt="DataWhiz Logo" style="width: 100%; height: 100%; object-fit: contain;" />
+        </div>
+        <div class="title">DataWhiz</div>
+      </div>
+      <nav class="nav">
+        <div class="item" onclick="window.location.href='index.html'">🏠 Dashboard</div>
+        <div class="item" onclick="uploadData()">⬆️ Upload Data</div>
+        <div class="item" onclick="openAnalysisPage()">📊 Analysis</div>
+        <div class="item active">🤖 Machine Learning</div>
+        <div class="item" onclick="window.location.href='settings.html'">⚙️ Settings</div>
+      </nav>
+      <div style="flex:1;"></div>
+      <div class="footer">v1.0 • © DataWhiz</div>
+    </aside>
+
+    <main style="flex:1; display:flex; flex-direction:column;">
+      <header class="header">
+        <div style="width:20px;"></div>
+        <div class="search" style="max-width: none; margin: 0;">
+          <h1 style="margin: 0; color: var(--muted); font-size: 28px; font-weight: 700;">🤖 Machine Learning</h1>
+        </div>
+        <button id="themeToggle" class="btn ghost">🌙 Toggle Theme</button>
+      </header>
+
+      <section class="content">
+        <div class="container">
+          <div style="text-align: center; margin-bottom: 48px;">
+            <h2 style="color: var(--primary); font-size: 32px; margin-bottom: 12px;">Advanced Machine Learning</h2>
+            <p style="color: var(--muted-2); font-size: 18px;">Build powerful predictive models with cutting-edge ML algorithms</p>
+            <div style="margin-top: 32px;">
+              <div class="stat-card">
+                <strong>10+</strong>
+                <span>ML Models</span>
+              </div>
+              <div class="stat-card">
+                <strong>100%</strong>
+                <span>Real Data</span>
+              </div>
+              <div class="stat-card">
+                <strong>Auto</strong>
+                <span>Training</span>
+              </div>
+              <div class="stat-card">
+                <strong>High</strong>
+                <span>Accuracy</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Overview -->
+          <div class="info-section">
+            <h2>🚀 Overview</h2>
+            <p>
+              DataWhiz Machine Learning provides state-of-the-art algorithms to build, train, and deploy predictive 
+              models. Our platform uses 100% real data from your files - no hardcoded or fake values. All models 
+              are trained on actual data and provide genuine predictions based on learned patterns.
+            </p>
+            <p>
+              From classification and regression to clustering and anomaly detection, DataWhiz offers comprehensive 
+              ML capabilities to help you unlock insights and make data-driven predictions.
+            </p>
+          </div>
+
+          <!-- Available Models -->
+          <div class="info-section">
+            <h2>🧠 Available ML Models</h2>
+            
+            <div class="model-card">
+              <h4>Random Forest (Classifier & Regressor)</h4>
+              <p><strong>Type:</strong> Ensemble Learning Algorithm</p>
+              <p><strong>Best For:</strong> High-accuracy predictions, handling complex patterns</p>
+              <ul>
+                <li>Creates multiple decision trees and combines their predictions</li>
+                <li>Resistant to overfitting compared to single trees</li>
+                <li>Handles both numerical and categorical features</li>
+                <li>Provides feature importance rankings</li>
+                <li>Works well for classification and regression tasks</li>
+                <li>Default: 100 estimators, max depth of 10</li>
+              </ul>
+            </div>
+
+            <div class="model-card">
+              <h4>Gradient Boosting Classifier</h4>
+              <p><strong>Type:</strong> Sequential Ensemble Learning</p>
+              <p><strong>Best For:</strong> Highest accuracy, complex decision boundaries</p>
+              <ul>
+                <li>Builds models sequentially, each correcting previous errors</li>
+                <li>Excellent for binary and multi-class classification</li>
+                <li>Automatically handles feature interactions</li>
+                <li>Robust to outliers and missing data</li>
+                <li>Provides probability estimates for predictions</li>
+                <li>Default: 100 estimators, max depth of 5</li>
+              </ul>
+            </div>
+
+            <div class="model-card">
+              <h4>K-Means Clustering</h4>
+              <p><strong>Type:</strong> Unsupervised Learning Algorithm</p>
+              <p><strong>Best For:</strong> Customer segmentation, data grouping</p>
+              <ul>
+                <li>Identifies natural groupings in your data</li>
+                <li>Finds k distinct clusters based on similarity</li>
+                <li>Discover hidden patterns and segments</li>
+                <li>Useful for market research and segmentation</li>
+                <li>Visualizable on 2D/3D feature spaces</li>
+                <li>Automatically determines optimal number of clusters</li>
+              </ul>
+            </div>
+
+            <div class="model-card">
+              <h4>Linear Regression</h4>
+              <p><strong>Type:</strong> Supervised Learning Algorithm</p>
+              <p><strong>Best For:</strong> Continuous value prediction, trend analysis</p>
+              <ul>
+                <li>Models linear relationships between variables</li>
+                <li>Simple, interpretable, and fast</li>
+                <li>Provides coefficient interpretations</li>
+                <li>Excellent for forecasting and trend analysis</li>
+                <li>Evaluated with R², RMSE, MAE metrics</li>
+              </ul>
+            </div>
+
+            <div class="model-card">
+              <h4>Isolation Forest (Anomaly Detection)</h4>
+              <p><strong>Type:</strong> Unsupervised Anomaly Detection</p>
+              <p><strong>Best For:</strong> Finding outliers and unusual patterns</p>
+              <ul>
+                <li>Detects anomalies without labeled data</li>
+                <li>Identifies fraud, errors, or unusual events</li>
+                <li>Works well with high-dimensional data</li>
+                <li>Produces anomaly scores for each record</li>
+                <li>Automatically flags suspicious patterns</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Applications -->
+          <div class="info-section">
+            <h2>🎯 ML Applications</h2>
+            
+            <div class="application-card">
+              <h4>🏥 Healthcare Predictions</h4>
+              <p><strong>Available Models:</strong></p>
+              <ul>
+                <li><strong>Readmission Risk Prediction:</strong> Predict patient readmission likelihood using Random Forest</li>
+                <li><strong>Cost Prediction:</strong> Forecast healthcare costs with Random Forest Regression</li>
+                <li><strong>Risk Level Classification:</strong> Categorize patients into risk groups</li>
+                <li><strong>Treatment Outcome Prediction:</strong> Predict success/failure of treatments using Gradient Boosting</li>
+              </ul>
+              <p><strong>Real Features Used:</strong> Age, Medical Condition, Billing Amount, Medication, Insurance Provider, Room Number</p>
+            </div>
+
+            <div class="application-card">
+              <h4>💼 Business Intelligence</h4>
+              <p><strong>Available Models:</strong></p>
+              <ul>
+                <li><strong>Demand Forecasting:</strong> Predict future sales with Random Forest Regression</li>
+                <li><strong>Churn Prediction:</strong> Identify at-risk customers using classification models</li>
+                <li><strong>Customer Segmentation:</strong> Group customers using K-Means clustering</li>
+                <li><strong>Anomaly Detection:</strong> Find unusual transactions or behaviors</li>
+              </ul>
+              <p><strong>Key Metrics:</strong> Revenue trends, customer lifetime value, retention rates, segmentation insights</p>
+            </div>
+
+            <div class="application-card">
+              <h4>📊 Analytics & Insights</h4>
+              <p><strong>Available Models:</strong></p>
+              <ul>
+                <li><strong>Regression Analysis:</strong> Model relationships between variables</li>
+                <li><strong>Classification Tasks:</strong> Categorize and predict outcomes</li>
+                <li><strong>Clustering:</strong> Discover hidden patterns in data</li>
+                <li><strong>Time Series Forecasting:</strong> Predict future trends</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Model Training Process -->
+          <div class="info-section">
+            <h2>⚙️ Model Training Process</h2>
+            
+            <div class="model-card">
+              <h4>Automatic Training Workflow</h4>
+              <p><strong>Step 1: Data Preparation</strong></p>
+              <ul>
+                <li>Automatically detects and encodes categorical features</li>
+                <li>Handles missing values with appropriate strategies</li>
+                <li>Normalizes numerical features when needed</li>
+                <li>Minimum 20 records required for training</li>
+              </ul>
+
+              <p><strong>Step 2: Data Splitting</strong></p>
+              <ul>
+                <li>80/20 train-test split for model validation</li>
+                <li>Stratified splitting for classification tasks</li>
+                <li>Ensures representative samples in both sets</li>
+              </ul>
+
+              <p><strong>Step 3: Model Training</strong></p>
+              <ul>
+                <li>Trains on actual data from your uploaded files</li>
+                <li>Uses optimized hyperparameters</li>
+                <li>Applies cross-validation for robustness</li>
+                <li>No fake or synthetic data used</li>
+              </ul>
+
+              <p><strong>Step 4: Evaluation</strong></p>
+              <ul>
+                <li>Tests on unseen data for honest performance</li>
+                <li>Calculates accuracy, precision, recall, F1-score</li>
+                <li>Provides feature importance rankings</li>
+                <li>Visualizes performance metrics</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Model Performance Metrics -->
+          <div class="info-section">
+            <h2>📊 Performance Metrics</h2>
+            
+            <div class="model-card">
+              <h4>Classification Metrics</h4>
+              <ul>
+                <li><strong>Accuracy:</strong> Overall correctness percentage</li>
+                <li><strong>Precision:</strong> Positive prediction accuracy</li>
+                <li><strong>Recall (Sensitivity):</strong> True positive detection rate</li>
+                <li><strong>F1-Score:</strong> Harmonic mean of precision and recall</li>
+                <li><strong>Confusion Matrix:</strong> Detailed prediction breakdown</li>
+              </ul>
+            </div>
+
+            <div class="model-card">
+              <h4>Regression Metrics</h4>
+              <ul>
+                <li><strong>R² Score:</strong> Model fit quality (0-1, higher is better)</li>
+                <li><strong>RMSE:</strong> Root mean squared error</li>
+                <li><strong>MAE:</strong> Mean absolute error</li>
+                <li><strong>Prediction Range:</strong> Min and max predicted values</li>
+              </ul>
+            </div>
+
+            <div class="model-card">
+              <h4>Clustering Metrics</h4>
+              <ul>
+                <li><strong>Cluster Sizes:</strong> Number of points in each cluster</li>
+                <li><strong>Cluster Characteristics:</strong> Mean values per cluster</li>
+                <li><strong>Silhouette Score:</strong> Cluster quality measure</li>
+                <li><strong>Visualization:</strong> 2D/3D cluster plots</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Real Data Assurance -->
+          <div class="info-section">
+            <h2>✅ 100% Real Data Training</h2>
+            <p>
+              DataWhiz ensures all ML models use genuine data from your uploaded files. We never use hardcoded values, 
+              synthetic data, or fake predictions. Every model is trained on your actual data and provides authentic 
+              predictions based on learned patterns.
+            </p>
+            
+            <div class="model-card">
+              <h4>Data Integrity Guarantee</h4>
+              <ul>
+                <li>Training data comes directly from your CSV/Excel files</li>
+                <li>No pre-computed or fake values used</li>
+                <li>Real-time model training on your dataset</li>
+                <li>Transparent feature selection and encoding</li>
+                <li>Actual performance metrics reported</li>
+                <li>Genuine predictions generated</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Feature Importance -->
+          <div class="info-section">
+            <h2>🔍 Feature Importance Analysis</h2>
+            <p>Understand which features drive your predictions:</p>
+            
+            <div class="model-card">
+              <h4>Interpretability Tools</h4>
+              <ul>
+                <li><strong>Top Features:</strong> Ranked list of most important features</li>
+                <li><strong>Importance Scores:</strong> Numerical contribution of each feature</li>
+                <li><strong>Visualization:</strong> Bar charts showing feature importance</li>
+                <li><strong>Insights:</strong> Understand what drives your model's decisions</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Getting Started -->
+          <div style="text-align: center; margin: 48px 0;">
+            <h2 style="color: var(--primary); font-size: 32px; margin-bottom: 24px;">Ready to Build ML Models?</h2>
+            <p style="color: var(--muted-2); font-size: 18px; margin-bottom: 32px;">Upload your data and start training powerful predictive models!</p>
+            <div style="display: flex; gap: 12px; justify-content: center;">
+              <button class="btn primary" onclick="launchAnalysis()">🚀 Launch ML Workspace</button>
+              <button class="btn ghost" onclick="uploadData()">⬆️ Upload Data</button>
+              <button class="btn ghost" onclick="window.location.href='index.html'">🏠 Back to Home</button>
+            </div>
+          </div>
+
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    function launchAnalysis() {
+      window.location.href = 'analysis.html';
+    }
+    
+    function uploadData() {
+      window.location.href = 'analysis.html';
+    }
+
+    function openAnalysisPage() {
+      window.location.href = 'analysis-info.html';
+    }
+    
+    // theme toggle
+    const btn = document.getElementById('themeToggle');
+    btn.addEventListener('click', () => {
+      document.documentElement.classList.toggle('light');
+      localStorage.setItem('dw-theme', document.documentElement.classList.contains('light') ? 'light' : 'dark');
+    });
+    
+    // restore theme
+    (function(){
+      const t = localStorage.getItem('dw-theme');
+      if (t === 'light') document.documentElement.classList.add('light');
+    })();
+  </script>
+</body>
+</html>
+

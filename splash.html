@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>DataWhiz - Loading</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: linear-gradient(-45deg, #0d1117, #16213e, #0f172a, #1a1a2e);
+      background-size: 400% 400%;
+      animation: bgShift 25s ease infinite;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      overflow: hidden;
+      color: #c0c0c0;
+      position: relative;
+    }
+
+    @keyframes bgShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    @keyframes pulse {
+      0%, 100% { 
+        opacity: 0.6; 
+        transform: scale(1); 
+      }
+      50% { 
+        opacity: 1; 
+        transform: scale(1.05); 
+      }
+    }
+
+    /* Animated background particles */
+    .particles {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .particle {
+      position: absolute;
+      background: radial-gradient(circle, rgba(79, 209, 197, 0.08) 0%, rgba(79, 209, 197, 0) 70%);
+      border-radius: 50%;
+      animation: particleFloat 28s infinite ease-in-out;
+    }
+
+    @keyframes particleFloat {
+      0%, 100% {
+        transform: translate(0, 0) scale(1);
+        opacity: 0.1;
+      }
+      25% {
+        transform: translate(50px, -50px) scale(1.2);
+        opacity: 0.15;
+      }
+      50% {
+        transform: translate(-30px, 80px) scale(0.8);
+        opacity: 0.12;
+      }
+      75% {
+        transform: translate(80px, 30px) scale(1.1);
+        opacity: 0.18;
+      }
+    }
+
+    /* Geometric background shapes */
+    .geometric-shapes {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      overflow: hidden;
+    }
+
+    .shape {
+      position: absolute;
+      border: 1px solid rgba(79, 209, 197, 0.06);
+      opacity: 0.15;
+    }
+
+    .shape-1 {
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      top: -150px;
+      left: -150px;
+      animation: rotate 30s linear infinite;
+    }
+
+    .shape-2 {
+      width: 200px;
+      height: 200px;
+      transform: rotate(45deg);
+      bottom: -100px;
+      right: -100px;
+      animation: rotateReverse 25s linear infinite;
+    }
+
+    .shape-3 {
+      width: 150px;
+      height: 150px;
+      border-radius: 20px;
+      top: 50%;
+      right: -75px;
+      animation: rotate 20s linear infinite;
+    }
+
+    @keyframes rotate {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    @keyframes rotateReverse {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(-360deg); }
+    }
+
+    /* Splash box card */
+    .splash-box {
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(79, 209, 197, 0.12);
+      border-radius: 16px;
+      box-shadow: 
+        0 8px 32px rgba(6, 182, 212, 0.12),
+        0 0 1px rgba(79, 209, 197, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+      padding: 48px 40px;
+      position: relative;
+      z-index: 10;
+      width: 100%;
+      max-width: 420px;
+      animation: splashEnter 0.8s ease-out forwards;
+      overflow: hidden;
+    }
+
+    /* Soft reflection line on splash box */
+    .splash-box::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(120deg, rgba(255, 255, 255, 0.05) 0%, transparent 70%);
+      pointer-events: none;
+      border-radius: 16px;
+    }
+
+    @keyframes splashEnter {
+      0% { 
+        opacity: 0; 
+        transform: scale(0.95) translateY(20px);
+      }
+      100% { 
+        opacity: 1; 
+        transform: scale(1) translateY(0);
+      }
+    }
+
+    .splash-box.fade-out {
+      animation: splashExit 0.5s ease-in forwards;
+    }
+
+    @keyframes splashExit {
+      to {
+        opacity: 0;
+        transform: scale(0.98) translateY(-10px);
+      }
+    }
+
+    .splash-container {
+      text-align: center;
+      position: relative;
+    }
+
+    .logo-container {
+      margin-bottom: 32px;
+      position: relative;
+    }
+
+    /* Orbit line around logo */
+    .orbit-line {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 200px;
+      height: 200px;
+      border: 1px solid rgba(79, 209, 197, 0.15);
+      border-radius: 50%;
+      animation: orbitRotate 15s linear infinite;
+    }
+
+    .orbit-line::before {
+      content: '';
+      position: absolute;
+      top: -2px;
+      left: 50%;
+      width: 4px;
+      height: 4px;
+      background: rgba(79, 209, 197, 0.4);
+      border-radius: 50%;
+      transform: translateX(-50%);
+      box-shadow: 0 0 8px rgba(79, 209, 197, 0.3);
+    }
+
+    @keyframes orbitRotate {
+      from { transform: translate(-50%, -50%) rotate(0deg); }
+      to { transform: translate(-50%, -50%) rotate(360deg); }
+    }
+
+    .logo-wrapper {
+      position: relative;
+      display: inline-block;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    /* Subtle depth behind logo icon */
+    .logo-wrapper::before {
+      content: '';
+      position: absolute;
+      inset: -20px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(6, 182, 212, 0.08), transparent 70%);
+      animation: pulse 3s ease-in-out infinite;
+      z-index: -2;
+    }
+
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0) rotate(0deg);
+      }
+      25% {
+        transform: translateY(-8px) rotate(1deg);
+      }
+      50% {
+        transform: translateY(-5px) rotate(0deg);
+      }
+      75% {
+        transform: translateY(-8px) rotate(-1deg);
+      }
+    }
+
+    /* Glow effect around logo */
+    .logo-glow {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 180px;
+      height: 180px;
+      background: radial-gradient(circle, rgba(79, 209, 197, 0.12) 0%, rgba(79, 209, 197, 0) 70%);
+      border-radius: 50%;
+      animation: glowPulse 3s ease-in-out infinite;
+      z-index: -1;
+    }
+
+    @keyframes glowPulse {
+      0%, 100% {
+        opacity: 0.15;
+        transform: translate(-50%, -50%) scale(1);
+      }
+      50% {
+        opacity: 0.25;
+        transform: translate(-50%, -50%) scale(1.1);
+      }
+    }
+
+    .logo {
+      width: 140px;
+      height: 140px;
+      margin: 0 auto;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.02) 100%);
+      border-radius: 28px;
+      padding: 24px;
+      backdrop-filter: blur(20px);
+      border: 2px solid rgba(79, 209, 197, 0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+      transition: all 0.3s ease;
+    }
+
+    .logo::before {
+      content: '';
+      position: absolute;
+      top: -2px;
+      left: -2px;
+      right: -2px;
+      bottom: -2px;
+      border-radius: 28px;
+      background: linear-gradient(45deg, rgba(79, 209, 197, 0.2), rgba(59, 130, 246, 0.2), rgba(79, 209, 197, 0.2));
+      background-size: 200% 200%;
+      z-index: -1;
+      animation: borderGlow 3s ease infinite;
+      opacity: 0.3;
+    }
+
+    @keyframes borderGlow {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+    .logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      opacity: 0.9;
+      filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+      transition: all 0.3s ease;
+    }
+
+    .logo img.ping {
+      animation: pingEffect 0.6s ease-out;
+    }
+
+    @keyframes pingEffect {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.15); }
+      100% { transform: scale(1); }
+    }
+
+    .app-name {
+      font-size: 42px;
+      font-weight: 700;
+      font-family: 'Poppins', 'Inter', sans-serif;
+      margin: 24px 0 12px 0;
+      background: linear-gradient(90deg, rgba(79, 209, 197, 0.9), rgba(59, 130, 246, 0.85), rgba(79, 209, 197, 0.9));
+      background-size: 200% 100%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: textGradient 4s ease infinite;
+      letter-spacing: -0.5px;
+      position: relative;
+    }
+
+    @keyframes textGradient {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+    .tagline {
+      font-size: 12px;
+      font-weight: 500;
+      opacity: 0.65;
+      margin-bottom: 32px;
+      color: #a0a0a0;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .loading-container {
+      margin-top: 32px;
+      position: relative;
+    }
+
+    .loading-bar-container {
+      width: 100%;
+      height: 6px;
+      background: rgba(255, 255, 255, 0.06);
+      border-radius: 12px;
+      overflow: hidden;
+      margin: 0 auto;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      position: relative;
+      box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    .loading-bar {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, 
+        rgba(79, 209, 197, 0.5) 0%, 
+        rgba(59, 130, 246, 0.5) 50%,
+        rgba(79, 209, 197, 0.5) 100%);
+      background-size: 200% 100%;
+      border-radius: 12px;
+      animation: loadingProgress 5s ease-in-out infinite, gradientMove 2s ease infinite;
+      box-shadow: 0 0 12px rgba(79, 209, 197, 0.2);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .loading-bar::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(120deg, 
+        transparent 0%, 
+        rgba(79, 209, 197, 0.25) 25%,
+        rgba(59, 130, 246, 0.3) 50%,
+        rgba(79, 209, 197, 0.25) 75%,
+        transparent 100%);
+      background-size: 200% 100%;
+      animation: shimmer 2s linear infinite;
+    }
+
+    @keyframes shimmer {
+      0% { background-position: -100% 0; }
+      100% { background-position: 100% 0; }
+    }
+
+    @keyframes loadingProgress {
+      0% { width: 0%; transform: scaleY(1); }
+      30% { width: 45%; transform: scaleY(1); }
+      60% { width: 75%; transform: scaleY(1); }
+      90% { width: 95%; transform: scaleY(1); }
+      98% { width: 100%; transform: scaleY(1.05); }
+      100% { width: 100%; transform: scaleY(1); }
+    }
+
+    .loading-bar.complete {
+      animation: bounceComplete 0.4s ease-out;
+    }
+
+    @keyframes bounceComplete {
+      0% { transform: scaleY(1); }
+      50% { transform: scaleY(1.08); }
+      100% { transform: scaleY(1); }
+    }
+
+    @keyframes gradientMove {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+    .loading-info {
+      margin-top: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .loading-text {
+      font-size: 13px;
+      font-weight: 500;
+      opacity: 0.7;
+      color: #b0b0b0;
+      letter-spacing: 0.3px;
+      font-family: 'Inter', sans-serif;
+      display: inline-block;
+    }
+
+    .loading-percentage {
+      font-size: 13px;
+      font-weight: 600;
+      color: rgba(79, 209, 197, 0.8);
+      font-family: 'Inter', sans-serif;
+    }
+
+    .loading-tips {
+      margin-top: 24px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      min-height: 40px;
+    }
+
+    .tip-text {
+      font-size: 11px;
+      color: #888888;
+      font-weight: 400;
+      opacity: 0.8;
+      letter-spacing: 0.2px;
+      font-style: italic;
+      animation: tipFade 4s ease-in-out infinite;
+    }
+
+    @keyframes tipFade {
+      0%, 80% { opacity: 0.8; }
+      90%, 100% { opacity: 0.3; }
+    }
+
+    .version {
+      position: absolute;
+      bottom: -30px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 10px;
+      opacity: 0;
+      font-weight: 500;
+      color: #999999;
+      letter-spacing: 0.8px;
+      z-index: 100;
+      background: rgba(15, 23, 42, 0.75);
+      padding: 3px 10px;
+      border-radius: 10px;
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+      animation: versionSlideUp 0.6s ease-out 1s forwards;
+    }
+
+    @keyframes versionSlideUp {
+      to {
+        bottom: 16px;
+        opacity: 0.65;
+      }
+    }
+
+    /* Decorative dots */
+    .dots {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .dot {
+      position: absolute;
+      width: 3px;
+      height: 3px;
+      background: rgba(79, 209, 197, 0.2);
+      border-radius: 50%;
+      animation: dotFloat 8s ease-in-out infinite;
+    }
+
+    @keyframes dotFloat {
+      0%, 100% {
+        transform: translateY(0);
+        opacity: 0.2;
+      }
+      50% {
+        transform: translateY(-20px);
+        opacity: 0.4;
+      }
+    }
+
+    /* Particle ping effect */
+    .particle-ping {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      border: 2px solid rgba(79, 209, 197, 0.4);
+      border-radius: 50%;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      animation: ping 1s ease-out;
+      pointer-events: none;
+    }
+
+    @keyframes ping {
+      0% {
+        transform: translate(-50%, -50%) scale(0.5);
+        opacity: 1;
+      }
+      100% {
+        transform: translate(-50%, -50%) scale(4);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Animated background particles -->
+  <div class="particles" id="particles"></div>
+  
+  <!-- Geometric shapes -->
+  <div class="geometric-shapes">
+    <div class="shape shape-1"></div>
+    <div class="shape shape-2"></div>
+    <div class="shape shape-3"></div>
+  </div>
+
+  <!-- Decorative dots -->
+  <div class="dots" id="dots"></div>
+
+  <div class="splash-box" id="splashBox">
+    <div class="splash-container">
+      <div class="logo-container">
+        <div class="orbit-line"></div>
+        <div class="logo-wrapper">
+          <div class="logo-glow"></div>
+          <div class="logo">
+            <img src="mind-map.png" alt="DataWhiz Logo" id="logoImg" />
+          </div>
+        </div>
+      </div>
+      <div class="app-name">DataWhiz</div>
+      <div class="tagline">Professional Data Analytics Platform</div>
+      <div class="loading-container">
+        <div class="loading-bar-container">
+          <div class="loading-bar" id="loadingBar"></div>
+        </div>
+        <div class="loading-info">
+          <div class="loading-text" id="loadingText">Initializing application</div>
+          <div class="loading-percentage" id="loadingPercent">0%</div>
+        </div>
+        <div class="loading-tips">
+          <div class="tip-text" id="tipText">Loading AI models...</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="version">v1.0</div>
+
+  <script>
+    // Create animated particles
+    const particlesContainer = document.getElementById('particles');
+    for (let i = 0; i < 10; i++) {
+      const particle = document.createElement('div');
+      particle.className = 'particle';
+      const size = Math.random() * 80 + 40;
+      particle.style.width = size + 'px';
+      particle.style.height = size + 'px';
+      particle.style.left = Math.random() * 100 + '%';
+      particle.style.top = Math.random() * 100 + '%';
+      particle.style.animationDelay = Math.random() * 5 + 's';
+      particle.style.animationDuration = (Math.random() * 10 + 15) + 's';
+      particlesContainer.appendChild(particle);
+    }
+
+    // Create decorative dots
+    const dotsContainer = document.getElementById('dots');
+    for (let i = 0; i < 15; i++) {
+      const dot = document.createElement('div');
+      dot.className = 'dot';
+      dot.style.left = Math.random() * 100 + '%';
+      dot.style.top = Math.random() * 100 + '%';
+      dot.style.animationDelay = Math.random() * 3 + 's';
+      dot.style.animationDuration = (Math.random() * 4 + 6) + 's';
+      dotsContainer.appendChild(dot);
+    }
+
+    // Loading messages with percentages
+    const loadingSteps = [
+      { text: 'Initializing application', percent: 20 },
+      { text: 'Loading modules', percent: 45 },
+      { text: 'Analyzing data pipelines', percent: 65 },
+      { text: 'Optimizing ML models', percent: 85 },
+      { text: 'Preparing interface', percent: 95 },
+      { text: 'Almost ready', percent: 100 }
+    ];
+
+    // Tips array - randomized
+    const tips = [
+      'Analyzing data pipelines...',
+      'Optimizing ML models...',
+      'Processing datasets...',
+      'Initializing visualization engine...',
+      'Setting up analytics tools...',
+      'Configuring data sources...',
+      'Preparing statistical models...',
+      'Loading visualization library...',
+      'Fetching datasets...',
+      'Initializing AI modules...',
+      'Calibrating algorithms...',
+      'Building model architecture...'
+    ];
+
+    // Shuffle tips array for randomization
+    function shuffleArray(array) {
+      const shuffled = [...array];
+      for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+      }
+      return shuffled;
+    }
+
+    const shuffledTips = shuffleArray(tips);
+
+    let currentStep = 0;
+    let currentTip = 0;
+    const loadingText = document.getElementById('loadingText');
+    const loadingPercent = document.getElementById('loadingPercent');
+    const tipText = document.getElementById('tipText');
+    const loadingBar = document.getElementById('loadingBar');
+    const logoImg = document.getElementById('logoImg');
+    const splashBox = document.getElementById('splashBox');
+
+    // Update loading progress
+    function updateProgress() {
+      if (currentStep < loadingSteps.length) {
+        const step = loadingSteps[currentStep];
+        loadingText.textContent = step.text;
+        loadingPercent.textContent = step.percent + '%';
+        
+        // Update progress bar smoothly
+        loadingBar.style.width = step.percent + '%';
+        
+        // Trigger bounce effect when reaching 100%
+        if (step.percent === 100) {
+          setTimeout(() => {
+            loadingBar.classList.add('complete');
+            setTimeout(() => {
+              loadingBar.classList.remove('complete');
+            }, 400);
+          }, 100);
+        }
+        
+        currentStep++;
+      }
+    }
+
+    // Update tips with randomization
+    function updateTip() {
+      tipText.textContent = shuffledTips[currentTip];
+      currentTip = (currentTip + 1) % shuffledTips.length;
+    }
+
+    // Randomize tips order periodically for variety
+    const reshuffleInterval = setInterval(() => {
+      const newShuffled = shuffleArray([...tips]);
+      shuffledTips.splice(0, shuffledTips.length, ...newShuffled);
+      if (currentTip >= shuffledTips.length) {
+        currentTip = 0;
+      }
+    }, 12000); // Reshuffle every 12 seconds
+
+    // Trigger particle ping when loading completes
+    function triggerPing() {
+      const ping = document.createElement('div');
+      ping.className = 'particle-ping';
+      document.querySelector('.logo-container').appendChild(ping);
+      logoImg.classList.add('ping');
+      
+      setTimeout(() => {
+        ping.remove();
+        logoImg.classList.remove('ping');
+      }, 1000);
+    }
+
+    // Start progress updates
+    updateProgress(); // Initial state
+    updateTip(); // Initial tip
+    
+    const progressInterval = setInterval(() => {
+      if (currentStep < loadingSteps.length) {
+        updateProgress();
+      } else {
+        clearInterval(progressInterval);
+        triggerPing(); // Ping when done
+      }
+    }, 850);
+
+    // Rotate tips
+    const tipInterval = setInterval(() => {
+      updateTip();
+    }, 3500);
+
+    // Listen for window close (from main.js via IPC if needed)
+    // This would be handled by main.js when app is ready
+    // For now, we'll simulate completion after minimum time
+    setTimeout(() => {
+      if (currentStep >= loadingSteps.length) {
+        splashBox.classList.add('fade-out');
+      }
+    }, 7800);
+  </script>
+</body>
+</html>
